@@ -8,11 +8,29 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import RegistrationService from '../services/registration.service'
 
 @Component({
   components: {
     HelloWorld,
   },
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  created() {
+    console.log(process.env.VUE_APP_API_URL);
+    console.log(process.env);
+    console.log('create');
+    this.getListUser();
+  }
+
+  getListUser() {
+    RegistrationService.getListUser()
+      .then((res) => {
+        // console.log(res);
+      })
+      .catch((err) => {
+        // console.log(err);
+      });
+  }
+}
 </script>

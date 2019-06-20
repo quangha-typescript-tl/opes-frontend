@@ -21,31 +21,45 @@
 <script lang="ts">
   import {Component, Vue} from 'vue-property-decorator'
   import {DialogService} from './services/dialog.service'
+  import RegistrationService from './services/registration.service'
 
   @Component({
     components: {},
   })
   export default class App extends Vue {
     dialogService = new DialogService();
+    public listUser = [];
 
     beforeCreate() {
     }
 
     created() {
-      console.log(process.env.API);
+      console.log(process.env.VUE_APP_API_URL);
+      console.log(process.env);
       console.log('create');
       this.dialogService.setLoaderVisible(true);
-
       setTimeout(() => {
         this.dialogService.setLoaderVisible(false);
       }, 3000);
+
+      this.getListUser();
+    }
+
+    getListUser() {
+      RegistrationService.getListUser()
+        .then((res) => {
+          // console.log(res);
+        })
+        .catch((err) => {
+          // console.log(err);
+        });
     }
   }
 </script>
 
 <style lang="scss">
   /*@import './assets/style/import';*/
-  /*@import '../node_modules/font-awesome/css/font-awesome.min.css';*/
+  @import '../node_modules/font-awesome/css/font-awesome.min.css';
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
