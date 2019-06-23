@@ -9,12 +9,17 @@
       </div>
     </div>
 
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-      |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+<!--    <div id="nav">-->
+<!--      <router-link to="/">Home</router-link>-->
+<!--      |-->
+<!--      <router-link to="/about">About</router-link>-->
+<!--    </div>-->
+
+    <component :is="layout">
+      <router-view :layout.sync="layout"/>
+    </component>
+
+
   </div>
 </template>
 
@@ -22,6 +27,7 @@
   import {Component, Vue} from 'vue-property-decorator'
   import {DialogService} from './services/dialog.service'
   import RegistrationService from './services/registration.service'
+  // import $ from 'jQuery'
 
   @Component({
     components: {},
@@ -29,6 +35,7 @@
   export default class App extends Vue {
     dialogService = new DialogService();
     public listUser = [];
+    public layout = 'div';
 
     beforeCreate() {
     }
@@ -58,8 +65,10 @@
 </script>
 
 <style lang="scss">
-  /*@import './assets/style/import';*/
-  @import '../node_modules/font-awesome/css/font-awesome.min.css';
+  @import './assets/style/_import.scss';
+  /*@import '../node_modules/font-awesome/css/font-awesome.min.css';*/
+  /*@import '../node_modules/bootstrap/scss/bootstrap';*/
+  /*@import '../node_modules/bootstrap-vue/src/index.scss';*/
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;

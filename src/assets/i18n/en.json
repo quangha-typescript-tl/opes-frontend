@@ -1,5 +1,10 @@
 {
   "LOADING": "Loading",
   "LOGIN": "login",
-  "HELLO": "{msg} ahihi en"
+  "LOGOUT": "Logout",
+  "HELLO": "{msg} ahihi en",
+  "HEADER": {
+    "PROFILE": "Profile",
+    "CHANGE_PASS": "Change password"
+  }
 }
