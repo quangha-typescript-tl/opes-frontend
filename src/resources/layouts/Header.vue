@@ -3,9 +3,7 @@
   <nav class="navbar navbar-toggleable-md navbar-inverse navbar-global">
     <div class="header-wrap header-wrap-opes">
 
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-              data-target="#nav-content"
-              aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -225,6 +223,15 @@
     padding: 2px 6px 3px;
     z-index: 999;
     right: 6px;
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E"); }
+    .navbar-text {
+      color: rgba(0, 0, 0, 0.5); }
+  }
+
+  .navbar-toggler-right {
+    position: absolute;
+    right: 1rem;
   }
 
   .hospital-dropdown-item .fa {
@@ -257,15 +264,56 @@
 
   @media (min-width: 992px) {
   /*!*@include media-breakpoint-up(lg) {*/
-    .navbar-toggleable-md .navbar-collapse {
-      display: -ms-flexbox !important;
-      display: flex !important;
-      width: 100%;
-    }
+    .navbar-toggleable-md {
+      .navbar-collapse {
+        display: -ms-flexbox !important;
+        display: flex !important;
+        width: 100%;
+      }
 
-    .navbar-toggleable-md .navbar-nav {
-      -ms-flex-direction: row;
-      flex-direction: row;
+      .navbar-nav {
+        -ms-flex-direction: row;
+        flex-direction: row;
+        .dropdown-menu {
+          left: -45%;
+          width: 300px;
+          right: auto;
+          position: absolute !important;
+          transform: translate(-50%, 0);
+          >:before,
+          >:after {
+            content: "";
+            position: absolute !important;
+            left: 80%;
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+          }
+          >:before {
+            top: -9px;
+            margin-left: -9px;
+            border-width: 0 9px 9px 9px;
+            border-color: transparent transparent $white transparent;
+            z-index: 0;
+          }
+          >:after {
+            top: -10px;
+            margin-left: -10px;
+            border-width: 0 10px 10px 10px;
+            border-color: transparent transparent rgba(0, 0, 0, 0.05) transparent;
+            z-index: -1;
+          }
+
+          .dropdown-profile {
+            padding: 0.25rem 1rem;
+          }
+        }
+      }
+
+      .navbar-toggler {
+        display: none;
+      }
     }
 
     .navbar-brand {
@@ -274,18 +322,47 @@
         height: 30px;
       }
     }
+  }
+
+  @media (max-width: 991px) {
+  //nclude media-breakpoint-down(md) {
+    .header-wrap-opes {
+      padding: .5rem 0 0;
+      display: block !important;
+    }
+    .nav-link-drjoy-info {
+      &-circle {
+        left: 1.6rem;
+        top: .6rem;
+      }
+    }
+    .navbar-brand {
+      position: absolute;
+      left: _rem(50px);
+      margin: 0;
+      z-index: 997;
+    }
     .navbar-nav {
+      border-top: 1px solid $white;
+      /*overflow-y: auto;*/
+      $nav-item-height: 40px;
+      $nav-item-length: 6;
+      $navbar-nav-border-height: 2px;
+      margin-top: 44px;
+      .nav-item {
+        padding: 0 1rem;
+      }
       .dropdown-menu {
-        left: -45%;
+        position: absolute !important;
+        left: 50%;
         width: 300px;
         right: auto;
-        position: absolute !important;
         transform: translate(-50%, 0);
         >:before,
         >:after {
           content: "";
           position: absolute !important;
-          left: 80%;
+          left: 50%;
           display: block;
           width: 0;
           height: 0;
@@ -305,37 +382,6 @@
           border-color: transparent transparent rgba(0, 0, 0, 0.05) transparent;
           z-index: -1;
         }
-
-        .dropdown-profile {
-          padding: 0.25rem 1rem;
-        }
-      }
-    }
-  }
-
-  @media (max-width: 991px) {
-  //nclude media-breakpoint-down(md) {
-    .nav-link-drjoy-info {
-      &-circle {
-        left: 1.6rem;
-        top: .6rem;
-      }
-    }
-    .navbar-brand {
-      position: absolute;
-      left: _rem(50px);
-      margin: 0;
-      z-index: 997;
-    }
-    .navbar-nav {
-      border-top: 1px solid $white;
-      overflow-y: auto;
-      $nav-item-height: 40px;
-      $nav-item-length: 6;
-      $navbar-nav-border-height: 2px;
-      margin-top: 44px;
-      .nav-item {
-        padding: 0 1rem;
       }
     }
     .nav-link .fa {
