@@ -9,7 +9,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import RegistrationService from '../../services/registration.service'
-import LayoutDefault1 from '../layouts/LayoutDefault1.vue';
+import LayoutDefaultMain from '../layouts/LayoutDefaultMain.vue';
 
 @Component({
   components: {
@@ -18,7 +18,7 @@ import LayoutDefault1 from '../layouts/LayoutDefault1.vue';
 })
 export default class Home extends Vue {
   created() {
-    this.$emit('update:layout', LayoutDefault1);
+    this.$emit('update:layout', LayoutDefaultMain);
     console.log(process.env.VUE_APP_API_URL);
     console.log(process.env);
     console.log('create');

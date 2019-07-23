@@ -1,3 +1,4 @@
+
 export class DialogService {
   BUTTON_COLOR = '#EF8B00';
   private delaySec = 0;
@@ -11,3 +12,6 @@ export class DialogService {
     return this.showLoader;
   }
 }
+
+const dialogService = new DialogService();
+export default dialogService;

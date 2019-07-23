@@ -1,7 +1,11 @@
 <template>
 
-  <nav class="navbar navbar-toggleable-md navbar-inverse navbar-global">
+  <nav class="fixed-top navbar navbar-toggleable-md navbar-inverse navbar-global">
     <div class="header-wrap header-wrap-opes">
+
+      <button class="navbar-btn-side-menu-toggle">
+        <i class="fa fa-lg fa-toggle-off"></i>
+      </button>
 
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -9,7 +13,7 @@
 
       <!-- Brand -->
       <a class="navbar-brand">
-        <img class="navbar-brand-logo" src="../../assets/img/logo-ominext.png">
+        <!-- <img class="navbar-brand-logo" src="../../assets/img/logo-ominext.png"> -->
       </a>
 
       <!-- Links -->
@@ -68,6 +72,13 @@
 
 <style lang="scss">
   @import '../../assets/style/_import.scss';
+  .fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+  }
   .navbar {
     padding: 0 !important;
   }
@@ -75,6 +86,22 @@
   .navbar-global {
     min-height: 50px;
     padding: 0;
+
+    .navbar-btn-side-menu-toggle {
+      position: absolute;
+      left: 0;
+      font-size: 1.375rem;
+      background: transparent;
+      border-width: 0;
+      color: #fff;
+      outline: 0;
+      z-index: 998;
+      padding-left: .5rem;
+
+      .fa {
+        color: #fff;
+      }
+    }
 
     .navbar-toggler {
       padding: 2px 6px 3px;
@@ -104,7 +131,7 @@
     min-height: 50px;
     width: 100%;
     align-items: center;
-    //background-color: $opes-symbol-color;
+    background-color: $opes-symbol-color;
     display: -ms-flexbox !important;
     display: flex !important;
   }
@@ -120,11 +147,12 @@
   .navbar-nav {
     .nav-link {
       position: relative;
-      padding: 0.8em 1em;
-      color: #555 !important;
+      padding: 0em 1em;
+      color: #FFFFFF !important;
 
       &:hover, &:active {
-        color: $opes-symbol-color !important;
+        //color: $opes-symbol-color !important;
+        color: rgba(255, 255, 255, 0.75) !important;
       }
 
       .fa {
@@ -135,10 +163,11 @@
         font-size: 14px;
         font-weight: 600;
         padding: 0 10px;
-        color: #555;
+        color: #FFFFFF;
 
         &:hover, &:active {
-          color: $opes-symbol-color !important;
+          //color: $opes-symbol-color !important;
+          color: rgba(255, 255, 255, 0.75) !important;
         }
       }
     }
@@ -265,6 +294,9 @@
   @media (min-width: 992px) {
   /*!*@include media-breakpoint-up(lg) {*/
     .navbar-toggleable-md {
+      .navbar-btn-side-menu-toggle {
+        display: none;
+      }
       .navbar-collapse {
         display: -ms-flexbox !important;
         display: flex !important;

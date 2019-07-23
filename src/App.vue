@@ -1,13 +1,13 @@
 <template>
   <div id="app">
 
-    <div class="loader-wrap loader-wrap-bg" :class="{'loader-show': dialogService.isLoaderVisible()}">
-      <div class="loader-overlay"></div>
-      <div class="loader">
-        <i class="fa fa-spinner fa-pulse fa-2x fa-fw loader-icon"></i>
-        <p class="loader-text">{{$t('LOADING')}}...</p>
-      </div>
-    </div>
+<!--    <div class="loader-wrap loader-wrap-bg" :class="{'loader-show': dialogService.isLoaderVisible()}">-->
+<!--      <div class="loader-overlay"></div>-->
+<!--      <div class="loader">-->
+<!--        <i class="fa fa-spinner fa-pulse fa-2x fa-fw loader-icon"></i>-->
+<!--        <p class="loader-text">{{$t('LOADING')}}...</p>-->
+<!--      </div>-->
+<!--    </div>-->
 
 <!--    <div id="nav">-->
 <!--      <router-link to="/">Home</router-link>-->
@@ -25,7 +25,7 @@
 
 <script lang="ts">
   import {Component, Vue} from 'vue-property-decorator'
-  import {DialogService} from './services/dialog.service'
+  import DialogService from './services/dialog.service'
   import RegistrationService from './services/registration.service'
   // import $ from 'jQuery'
 
@@ -33,7 +33,7 @@
     components: {},
   })
   export default class App extends Vue {
-    dialogService = new DialogService();
+    // dialogService = new DialogService();
     public listUser = [];
     public layout = 'div';
 
@@ -44,9 +44,9 @@
       console.log(process.env.VUE_APP_API_URL);
       console.log(process.env);
       console.log('create');
-      this.dialogService.setLoaderVisible(true);
+      DialogService.setLoaderVisible(true);
       setTimeout(() => {
-        this.dialogService.setLoaderVisible(false);
+        DialogService.setLoaderVisible(false);
       }, 3000);
 
       this.getListUser();
@@ -66,9 +66,10 @@
 
 <style lang="scss">
   @import './assets/style/_import.scss';
-  /*@import '../node_modules/font-awesome/css/font-awesome.min.css';*/
-  /*@import '../node_modules/bootstrap/scss/bootstrap';*/
-  /*@import '../node_modules/bootstrap-vue/src/index.scss';*/
+  @import './assets/style/style.scss';
+  // @import '../node_modules/font-awesome/css/font-awesome.min.css';
+  // @import '../node_modules/bootstrap/scss/bootstrap';
+  // @import '../node_modules/bootstrap-vue/src/index.scss';
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
