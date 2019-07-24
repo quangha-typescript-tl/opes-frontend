@@ -19,7 +19,6 @@ export class ShareValueService extends BaseService {
   fetchUserSession() {
     return WebApi.get('/api/re/getUserSession').then(
       (res) => {
-        console.log(res);
         this.userSession = res['data']['user'];
         return this.userSession;
       }

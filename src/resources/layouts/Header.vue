@@ -32,8 +32,11 @@
               </div>
               <div class="dropdown-divider"></div>
 
-              <a class="dropdown-item" href="#" target="_blank">{{ $t('HEADER.PROFILE') }}</a>
-              <a class="dropdown-item" href="#" target="_blank">{{ $t('HEADER.CHANGE_PASS') }}</a>
+              <router-link class="dropdown-item" to="/re/detailUser">{{ $t('HEADER.PROFILE') }}</router-link>
+              <router-link class="dropdown-item" to="/re/changePassword">{{ $t('HEADER.CHANGE_PASS') }}</router-link>
+
+              <!--<a class="dropdown-item" href="#" target="_blank">{{ $t('HEADER.PROFILE') }}</a>-->
+              <!--<a class="dropdown-item" href="#" target="_blank">{{ $t('HEADER.CHANGE_PASS') }}</a>-->
               <div class="dropdown-divider"></div>
 
               <a class="dropdown-item" href="#" target="_blank">{{ $t('LOGOUT') }}</a>

@@ -73,10 +73,7 @@
 
       ShareValueService.fetchUserSession().then(
         (res) => {
-          console.log('1: ' + res);
           this.userSession = res;
-
-          console.log('1111111111111111111111: ' + this.userSession['userName']);
         }
       ).catch((error) => {
         console.log(error);

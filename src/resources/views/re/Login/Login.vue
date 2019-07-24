@@ -6,7 +6,6 @@
   import LayoutDefaultMain from '../../../layouts/LayoutDefaultMain.vue'
   // import DialogService from '../../../../services/dialog.service'
   import RegistrationService from '../../../../services/registration.service'
-  import axios from 'axios';
 
   @Component({
     components: {
