@@ -1,11 +1,25 @@
 import axios from 'axios'
+import BaseService from "@/common/interceptor/BaseService";
 
 const webApi = axios.create({
   baseURL: process.env.VUE_APP_API_URL,
   timeout: 30000,
 });
 
-webApi.defaults.headers.common['Accept-Customer'] = process.env.VUE_APP_CUSTOMER_ID
+webApi.interceptors.request.use( (config) => {
+
+  const token = localStorage.getItem('access_token');
+
+  console.log('token' + token);
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+    // webApi.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+  }
+  console.log(config);
+  return config;
+});
+
+// webApi.defaults.headers.common['Accept-Customer'] = process.env.VUE_APP_CUSTOMER_ID
 
 // webApi.setToken = (token) => {
 //   webApi.defaults.headers.common['Authorization'] = token
@@ -19,6 +33,7 @@ webApi.defaults.headers.common['Accept-Customer'] = process.env.VUE_APP_CUSTOMER
 //   webApi.defaults.headers.common['Accept-Language'] = lang
 // }
 
+/**
 webApi.interceptors.request.use(function (config) {
   // hook
   if (!navigator.onLine)
@@ -54,5 +69,6 @@ const setToken = (token: any) => {
 const token = localStorage.getItem('web_token');
 console.log(token);
 setToken(token);
+ **/
 
-export default webApi
+export default webApi;

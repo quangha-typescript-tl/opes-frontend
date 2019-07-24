@@ -6,6 +6,7 @@
   import LayoutDefaultMain from '../../../layouts/LayoutDefaultMain.vue'
   // import DialogService from '../../../../services/dialog.service'
   import RegistrationService from '../../../../services/registration.service'
+  import axios from 'axios';
 
   @Component({
     components: {
@@ -29,10 +30,15 @@
           RegistrationService.login(this.email, this.password).then(
             (res) => {
               console.log(res);
+              localStorage.setItem('access_token', res['data']['access_token']);
+
+              this.$router.push('/re/listUser');
             }
-          );
+          ).catch((error) => {
+            console.log(error);
+          });
         }
-      })
+      });
     }
   }
 </script>

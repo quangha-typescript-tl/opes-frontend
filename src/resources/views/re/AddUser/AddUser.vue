@@ -5,6 +5,7 @@
   import {Component, Vue, Prop } from 'vue-property-decorator'
   import LayoutDefault from '../../../layouts/LayoutDefault.vue'
   import PageHeader from "@/components/PageHeader/PageHeader.vue"
+  import RegistrationService from '../../../../services/registration.service'
 
   @Component({
     components: {
@@ -19,9 +20,19 @@
 
     created() {
       this.$emit('update:layout', LayoutDefault);
+      this.getDepartments();
+
     }
 
-    add() {
+    getDepartments() {
+      RegistrationService.getDepartments().then(
+        (res) => {
+          console.log(res);
+        }
+      );
+    }
+
+    addUser() {
       this.items.push({ userName: '', email: '', department: 1 });
     }
 

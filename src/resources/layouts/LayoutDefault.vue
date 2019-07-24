@@ -25,10 +25,10 @@
             <div class="sidebar">
               <div class="inner">
                 <ul class="primary-menu">
-                  <li class="javascript"><router-link to="/listUser">List User</router-link></li>
-                  <li class="javascript"><router-link to="/addUser">Add User</router-link></li>
-                  <li class="javascript"><router-link to="/addUser">Add User</router-link></li>
-                  <li class="javascript"><router-link to="/addUser">Add User</router-link></li>
+                  <li class="javascript"><router-link to="/re/listUser">List User</router-link></li>
+                  <li class="javascript"><router-link to="/re/addUser">Add User</router-link></li>
+                  <li class="javascript"><router-link to="/re/addUser">Add User</router-link></li>
+                  <li class="javascript"><router-link to="/re/addUser">Add User</router-link></li>
                 </ul>
               </div>
             </div>

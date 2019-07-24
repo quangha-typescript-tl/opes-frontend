@@ -29,12 +29,12 @@ export default new Router({
       component: About
     },
     {
-      path: '/listUser',
+      path: '/re/listUser',
       name: 'listUser',
       component: ListUser
     },
     {
-      path: '/addUser',
+      path: '/re/addUser',
       name: 'addUser',
       component: AddUser
     },
