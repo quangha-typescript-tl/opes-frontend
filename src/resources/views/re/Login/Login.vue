@@ -6,6 +6,7 @@
   import LayoutDefaultMain from '../../../layouts/LayoutDefaultMain.vue'
   // import DialogService from '../../../../services/dialog.service'
   import RegistrationService from '../../../../services/registration.service'
+  import ShareValueService from '../../../../services/shareValue.service'
 
   @Component({
     components: {
@@ -20,20 +21,14 @@
     }
 
     login() {
-      console.log(this.email);
-      console.log(this.password);
-
-
       this.$validator.validateAll().then((result) => {
         if (result) {
-          RegistrationService.login(this.email, this.password).then(
-            (res) => {
-              console.log(res);
-              localStorage.setItem('access_token', res['data']['access_token']);
+          RegistrationService.login(this.email, this.password).then((res) => {
 
-              this.$router.push('/re/listUser');
-            }
-          ).catch((error) => {
+            ShareValueService.setAccessToken(res['data']['access_token']);
+            this.$router.push('/re/listUser');
+
+          }).catch((error) => {
             console.log(error);
           });
         }

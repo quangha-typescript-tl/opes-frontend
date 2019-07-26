@@ -35,11 +35,9 @@
               <router-link class="dropdown-item" to="/re/detailUser">{{ $t('HEADER.PROFILE') }}</router-link>
               <router-link class="dropdown-item" to="/re/changePassword">{{ $t('HEADER.CHANGE_PASS') }}</router-link>
 
-              <!--<a class="dropdown-item" href="#" target="_blank">{{ $t('HEADER.PROFILE') }}</a>-->
-              <!--<a class="dropdown-item" href="#" target="_blank">{{ $t('HEADER.CHANGE_PASS') }}</a>-->
               <div class="dropdown-divider"></div>
 
-              <a class="dropdown-item" href="#" target="_blank">{{ $t('LOGOUT') }}</a>
+              <a class="dropdown-item" href="#" target="_blank" @click.prevent="logout">{{ $t('LOGOUT') }}</a>
             </div>
           </li>
         </ul>
@@ -53,6 +51,8 @@
   import {Component, Vue} from 'vue-property-decorator';
   import MiniProfile from '../../components/MiniProfile/MiniProfile.vue'
   import FaceIcon from "@/components/FaceIcon/FaceIcon.vue";
+  import RegistrationService from '../../services/registration.service'
+  import ShareValueService from '../../services/shareValue.service'
 
   @Component({
     components: {
@@ -69,6 +69,17 @@
 
     created() {
       console.log('Header');
+    }
+
+    logout() {
+      RegistrationService.logout().then((res) => {
+
+        ShareValueService.removeAccessToken();
+        this.$router.push('/login');
+
+      }).catch((error) => {
+        console.log(error);
+      })
     }
   }
 </script>

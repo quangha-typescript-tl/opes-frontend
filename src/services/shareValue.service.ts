@@ -8,6 +8,14 @@ export class ShareValueService extends BaseService {
     super(props)
   }
 
+  setAccessToken(access_token: string) {
+    localStorage.setItem('access_token', access_token);
+  }
+
+  removeAccessToken() {
+    localStorage.removeItem('access_token');
+  }
+
   getUserSession() {
     if (this.userSession) {
       return this.userSession;
