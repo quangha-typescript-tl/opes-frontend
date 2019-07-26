@@ -5,6 +5,8 @@ import About from './resources/views/About.vue'
 import ListUser from './resources/views/re/ListUser/ListUser.vue'
 import AddUser from './resources/views/re/AddUser/AddUser.vue'
 import ChangePassword from './resources/views/re/ChangePassword/ChangePassword.vue'
+import ListDepartment from './resources/views/re/ListDepartment/ListDepartment.vue'
+
 import Login from './resources/views/re/Login/Login.vue'
 
 Vue.use(Router)
@@ -42,6 +44,11 @@ export default new Router({
       path: '/re/changePassword',
       name: 'changePassword',
       component: ChangePassword
+    },
+    {
+      path: '/re/listDepartment',
+      name: 'listDepartment',
+      component: ListDepartment
     },
     // {
     //   path: '/about',

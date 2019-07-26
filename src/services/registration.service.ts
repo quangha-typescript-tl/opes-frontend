@@ -25,6 +25,14 @@ export class RegistrationService extends BaseService {
   changePassword(password: string, passwordConfirm: string) {
     return WebApi.post('/api/re/changePassword', {password: password, passwordConfirm: passwordConfirm});
   }
+
+  getListDepartment() {
+    return WebApi.get('/api/re/getDepartments');
+  }
+
+  updateDepartment(department) {
+    return WebApi.post('/api/re/updateDepartment', department);
+  }
 }
 
 const registrationService = new RegistrationService();
