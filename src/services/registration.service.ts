@@ -30,8 +30,12 @@ export class RegistrationService extends BaseService {
     return WebApi.get('/api/re/getDepartments');
   }
 
-  updateDepartment(department) {
+  updateDepartment(department: any) {
     return WebApi.post('/api/re/updateDepartment', department);
+  }
+
+  saveDepartment(department: any) {
+    return WebApi.post('/api/re/addDepartment', department);
   }
 }
 

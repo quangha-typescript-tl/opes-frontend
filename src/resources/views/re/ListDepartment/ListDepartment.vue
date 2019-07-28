@@ -10,6 +10,7 @@
   import FaceIcon from "@/components/FaceIcon/FaceIcon.vue"
   import MiniProfile from "@/components/MiniProfile/MiniProfile.vue"
   import PageHeader from "@/components/PageHeader/PageHeader.vue"
+  import {Departmenrt} from "@/models/re/Departmenrt";
 
   @Component({
     components: {
@@ -19,7 +20,7 @@
     }
   })
   export default class ListDepartment extends Vue {
-    public listDepartment = [];
+    public listDepartment : Array<Departmenrt> = [];
     public userSession = {};
 
     created() {
@@ -55,6 +56,19 @@
           console.log('success');
         }
       ).catch((error) => {
+        console.log(error);
+      })
+    }
+
+    addDepartment() {
+      const department = new Departmenrt(null, null, null);
+      this.listDepartment.push(department);
+    }
+
+    saveDepartment(department: Departmenrt) {
+      RegistrationService.saveDepartment(department).then((res) => {
+        console.log(res);
+      }).catch((error) => {
         console.log(error);
       })
     }

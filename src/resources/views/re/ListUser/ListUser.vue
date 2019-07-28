@@ -10,7 +10,6 @@
   import FaceIcon from "@/components/FaceIcon/FaceIcon.vue"
   import MiniProfile from "@/components/MiniProfile/MiniProfile.vue"
   import PageHeader from "@/components/PageHeader/PageHeader.vue"
-  import axios from 'axios';
 
   @Component({
     components: {
@@ -20,50 +19,6 @@
     }
   })
   export default class ListUser extends Vue {
-    // public listUser = [
-    //   {
-    //     id: 1,
-    //     userName: 'user 1',
-    //     email: 'email@gmail.com',
-    //     departmentName: 'departmentName',
-    //     avatar: ''
-    //   },
-    //   {
-    //     id: 1,
-    //     userName: 'user 1',
-    //     email: 'email@gmail.com',
-    //     departmentName: 'departmentName',
-    //     avatar: ''
-    //   },
-    //   {
-    //     id: 1,
-    //     userName: 'user 1',
-    //     email: 'email@gmail.com',
-    //     departmentName: 'departmentName',
-    //     avatar: ''
-    //   },
-    //   {
-    //     id: 1,
-    //     userName: 'user 1',
-    //     email: 'email@gmail.com',
-    //     departmentName: 'departmentName',
-    //     avatar: ''
-    //   },
-    //   {
-    //     id: 1,
-    //     userName: 'user 1',
-    //     email: 'email@gmail.com',
-    //     departmentName: 'departmentName',
-    //     avatar: ''
-    //   },
-    //   {
-    //     id: 1,
-    //     userName: 'user 1',
-    //     email: 'email@gmail.com',
-    //     departmentName: 'departmentName',
-    //     avatar: ''
-    //   }
-    // ];
     public listUser = [];
     public userSession = {};
 
@@ -81,7 +36,6 @@
     }
 
     getListUser() {
-      console.log('11111111111111');
       RegistrationService.getListUser().then(
         (res) => {
           this.listUser = res['data']['users'];

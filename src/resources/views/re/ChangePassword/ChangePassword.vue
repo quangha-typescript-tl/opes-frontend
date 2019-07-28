@@ -5,9 +5,11 @@
   import {Component, Vue, Prop } from 'vue-property-decorator'
   import LayoutDefault from '../../../layouts/LayoutDefault.vue'
   import RegistrationService from '../../../../services/registration.service'
+  import PageHeader from '@/components/PageHeader/PageHeader.vue'
 
   @Component({
     components: {
+      PageHeader
     }
   })
   export default class ChangePassword extends Vue {
