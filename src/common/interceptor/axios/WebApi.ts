@@ -10,12 +10,10 @@ webApi.interceptors.request.use( (config) => {
 
   const token = localStorage.getItem('access_token');
 
-  console.log('token' + token);
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
     // webApi.defaults.headers.common['Authorization'] = 'Bearer ' + token;
   }
-  console.log(config);
   return config;
 });
 

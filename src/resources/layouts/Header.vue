@@ -75,6 +75,7 @@
       RegistrationService.logout().then((res) => {
 
         ShareValueService.removeAccessToken();
+        ShareValueService.clearUserSession();
         this.$router.push('/login');
 
       }).catch((error) => {

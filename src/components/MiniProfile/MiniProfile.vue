@@ -28,8 +28,6 @@
     public jobName: string | undefined;
 
     created() {
-      console.log(this.userInfo);
-      console.log(this.profileOptions);
       this.updateInfo();
     }
 

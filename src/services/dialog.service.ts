@@ -1,16 +1,15 @@
+import { Subject } from 'rxjs'
 
 export class DialogService {
-  BUTTON_COLOR = '#EF8B00';
-  private delaySec = 0;
-  private showLoader = false;
+  public showLoader: Subject<boolean> = new Subject();
 
   public setLoaderVisible(flag: boolean) {
-    this.showLoader = flag;
+    this.showLoader.next(flag);
   }
 
-  public isLoaderVisible() {
-    return this.showLoader;
-  }
+  // public isLoaderVisible() {
+  //   // return this.showLoader;
+  // }
 }
 
 const dialogService = new DialogService();

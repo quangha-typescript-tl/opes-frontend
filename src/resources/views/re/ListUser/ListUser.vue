@@ -4,13 +4,12 @@
 <script lang="ts">
   import {Component, Vue, Prop} from 'vue-property-decorator'
   import LayoutDefault from '../../../layouts/LayoutDefault.vue'
-  // import DialogService from '../../../../services/dialog.service'
+  import DialogService from '../../../../services/dialog.service'
   import RegistrationService from '../../../../services/registration.service'
   import ShareValueService from '../../../../services/shareValue.service'
   import FaceIcon from "@/components/FaceIcon/FaceIcon.vue"
   import MiniProfile from "@/components/MiniProfile/MiniProfile.vue"
   import PageHeader from "@/components/PageHeader/PageHeader.vue"
-  import axios from 'axios';
 
   @Component({
     components: {
@@ -20,50 +19,6 @@
     }
   })
   export default class ListUser extends Vue {
-    // public listUser = [
-    //   {
-    //     id: 1,
-    //     userName: 'user 1',
-    //     email: 'email@gmail.com',
-    //     departmentName: 'departmentName',
-    //     avatar: ''
-    //   },
-    //   {
-    //     id: 1,
-    //     userName: 'user 1',
-    //     email: 'email@gmail.com',
-    //     departmentName: 'departmentName',
-    //     avatar: ''
-    //   },
-    //   {
-    //     id: 1,
-    //     userName: 'user 1',
-    //     email: 'email@gmail.com',
-    //     departmentName: 'departmentName',
-    //     avatar: ''
-    //   },
-    //   {
-    //     id: 1,
-    //     userName: 'user 1',
-    //     email: 'email@gmail.com',
-    //     departmentName: 'departmentName',
-    //     avatar: ''
-    //   },
-    //   {
-    //     id: 1,
-    //     userName: 'user 1',
-    //     email: 'email@gmail.com',
-    //     departmentName: 'departmentName',
-    //     avatar: ''
-    //   },
-    //   {
-    //     id: 1,
-    //     userName: 'user 1',
-    //     email: 'email@gmail.com',
-    //     departmentName: 'departmentName',
-    //     avatar: ''
-    //   }
-    // ];
     public listUser = [];
     public userSession = {};
 
@@ -81,12 +36,14 @@
     }
 
     getListUser() {
-      console.log('11111111111111');
+      DialogService.setLoaderVisible(true);
       RegistrationService.getListUser().then(
         (res) => {
+          DialogService.setLoaderVisible(false);
           this.listUser = res['data']['users'];
         }
       ).catch((error) => {
+        DialogService.setLoaderVisible(false);
         console.log(error);
       })
     }

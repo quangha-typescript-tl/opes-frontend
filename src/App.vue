@@ -1,19 +1,13 @@
 <template>
   <div id="app">
 
-<!--    <div class="loader-wrap loader-wrap-bg" :class="{'loader-show': dialogService.isLoaderVisible()}">-->
-<!--      <div class="loader-overlay"></div>-->
-<!--      <div class="loader">-->
-<!--        <i class="fa fa-spinner fa-pulse fa-2x fa-fw loader-icon"></i>-->
-<!--        <p class="loader-text">{{$t('LOADING')}}...</p>-->
-<!--      </div>-->
-<!--    </div>-->
-
-<!--    <div id="nav">-->
-<!--      <router-link to="/">Home</router-link>-->
-<!--      |-->
-<!--      <router-link to="/about">About</router-link>-->
-<!--    </div>-->
+    <div class="loader-wrap loader-wrap-bg" :class="{'loader-show': isLoaderVisible}">
+      <div class="loader-overlay"></div>
+      <div class="loader">
+        <i class="fa fa-spinner fa-pulse fa-2x fa-fw loader-icon"></i>
+        <p class="loader-text">{{$t('LOADING')}}...</p>
+      </div>
+    </div>
 
     <component :is="layout">
       <router-view :layout.sync="layout"/>
@@ -33,33 +27,15 @@
     components: {},
   })
   export default class App extends Vue {
-    // dialogService = new DialogService();
     public listUser = [];
     public layout = 'div';
-
-    beforeCreate() {
-    }
+    public isLoaderVisible: boolean = false;
 
     created() {
-      console.log(process.env.VUE_APP_API_URL);
-      console.log(process.env);
-      console.log('create');
-      DialogService.setLoaderVisible(true);
-      setTimeout(() => {
-        DialogService.setLoaderVisible(false);
-      }, 3000);
-
-      this.getListUser();
-    }
-
-    getListUser() {
-      RegistrationService.getListUser()
-        .then((res) => {
-          // console.log(res);
-        })
-        .catch((err) => {
-          // console.log(err);
-        });
+      DialogService.showLoader.subscribe((res: boolean) => {
+          this.isLoaderVisible = res;
+        }
+      );
     }
   }
 </script>
@@ -67,7 +43,7 @@
 <style lang="scss">
   @import './assets/style/_import.scss';
   @import './assets/style/style.scss';
-  // @import '../node_modules/font-awesome/css/font-awesome.min.css';
+  @import '../node_modules/font-awesome/css/font-awesome.min.css';
   // @import '../node_modules/bootstrap/scss/bootstrap';
   // @import '../node_modules/bootstrap-vue/src/index.scss';
   #app {

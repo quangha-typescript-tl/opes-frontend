@@ -26,7 +26,7 @@
               <div class="inner">
                 <ul class="primary-menu">
                   <li class="javascript"><router-link to="/re/listUser">List User</router-link></li>
-                  <li class="javascript"><router-link to="/re/addUser">Add User</router-link></li>
+                  <li class="javascript"><router-link to="/re/adminUser">Admin User</router-link></li>
                   <li class="javascript"><router-link to="/re/listDepartment">List Department</router-link></li>
                   <li class="javascript"><router-link to="/re/addUser">Add User</router-link></li>
                 </ul>

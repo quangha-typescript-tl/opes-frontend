@@ -8,7 +8,6 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-import RegistrationService from '../../services/registration.service'
 import LayoutDefaultMain from '../layouts/LayoutDefaultMain.vue';
 
 @Component({
@@ -19,20 +18,6 @@ import LayoutDefaultMain from '../layouts/LayoutDefaultMain.vue';
 export default class Home extends Vue {
   created() {
     this.$emit('update:layout', LayoutDefaultMain);
-    console.log(process.env.VUE_APP_API_URL);
-    console.log(process.env);
-    console.log('create');
-    this.getListUser();
-  }
-
-  getListUser() {
-    RegistrationService.getListUser()
-      .then((res) => {
-        // console.log(res);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
   }
 }
 </script>

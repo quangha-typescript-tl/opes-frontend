@@ -16,6 +16,10 @@ export class ShareValueService extends BaseService {
     localStorage.removeItem('access_token');
   }
 
+  clearUserSession() {
+    this.userSession = null;
+  }
+
   getUserSession() {
     if (this.userSession) {
       return this.userSession;

@@ -5,6 +5,7 @@
   import {Component, Vue, Prop } from 'vue-property-decorator'
   import LayoutDefault from '../../../layouts/LayoutDefault.vue'
   import RegistrationService from '../../../../services/registration.service'
+  import DialogService from '@/services/dialog.service'
 
   @Component({
     components: {
@@ -22,11 +23,14 @@
 
       this.$validator.validateAll().then((result) => {
         if (result) {
+          DialogService.setLoaderVisible(true);
           RegistrationService.changePassword(this.password, this.passwordConfirm).then(
             (res) => {
+              DialogService.setLoaderVisible(false);
               console.log('success');
             }
           ).catch((error) => {
+            DialogService.setLoaderVisible(false);
             console.log(error);
           });
         }
