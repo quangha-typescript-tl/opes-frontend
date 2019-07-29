@@ -3,7 +3,7 @@
   <nav class="fixed-top navbar navbar-toggleable-md navbar-inverse navbar-global">
     <div class="header-wrap header-wrap-opes">
 
-      <button class="navbar-btn-side-menu-toggle">
+      <button class="navbar-btn-side-menu-toggle" @click="sideMenuToggle">
         <i class="fa fa-lg fa-toggle-off"></i>
       </button>
 
@@ -53,6 +53,7 @@
   import FaceIcon from "@/components/FaceIcon/FaceIcon.vue";
   import RegistrationService from '../../services/registration.service'
   import ShareValueService from '../../services/shareValue.service'
+  declare const $: any;
 
   @Component({
     components: {
@@ -66,10 +67,64 @@
       lastName: 'admin',
       avatar: ''
     };
+    public sideMenu: any;
+    public contentWrap: any;
+    public contentWrapEffect: any;
+    public navbarBtnSideMenuToggle: any;
+    public windowHeight: any;
+    public windowWidth: any;
 
     created() {
       console.log('Header');
+      // this.sideMenu = $('.side-menu');
+      // this.contentWrap = $('.content-wrap');
+      // this.contentWrapEffect = this.contentWrap.data('effect');
+      // this.navbarBtnSideMenuToggle = $('.navbar-btn-side-menu-toggle');
+      // this.windowHeight = $(window).height() - 50;
+      // this.windowWidth = $(window).width() < 991;
     }
+
+    sideMenuToggle() {
+      // if (this.sideMenu.hasClass('side-menu-hide')) {
+      //   this.sideMenuShow();
+      // } else {
+      //   this.sideMenuHide();
+      // }
+    }
+
+    // sideMenuShow() {
+    //   this.sideMenu.addClass('side-menu-show').removeClass('side-menu-hide');
+    //   this.contentWrap.addClass(this.contentWrapEffect);
+    //   this.showOverflow();
+    //   this.navbarBtnSideMenuToggle.find('i').removeClass('fa-toggle-off').addClass('fa-toggle-on');
+    // }
+    //
+    // sideMenuHide() {
+    //   this.sideMenu.removeClass('side-menu-show').addClass('side-menu-hide');
+    //   this.contentWrap.removeClass(this.contentWrapEffect);
+    //   this.hideOverflow();
+    //   this.navbarBtnSideMenuToggle.find('i').removeClass('fa-toggle-on').addClass('fa-toggle-off');
+    // }
+    //
+    // showOverflow() {
+    //   if (this.windowWidth) {
+    //     this.contentWrap.css({
+    //       'height': this.windowHeight,
+    //       'overflow-y': 'hidden'
+    //     });
+    //     $('body').css('overflow-y', 'hidden');
+    //   }
+    // }
+    //
+    // hideOverflow() {
+    //   if (this.windowWidth) {
+    //     this.contentWrap.css({
+    //       'height': 'auto',
+    //       'overflow-y': 'auto'
+    //     });
+    //     $('body').css('overflow-y', 'scroll');
+    //   }
+    // }
 
     logout() {
       RegistrationService.logout().then((res) => {

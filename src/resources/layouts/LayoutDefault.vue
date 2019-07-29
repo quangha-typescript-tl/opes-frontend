@@ -124,6 +124,9 @@
   }
   
   @media (max-width: 991px) {
+    .content-wrap {
+      margin-left: 0px;
+    }
     .side-menu {
       left: -292px; }
 
