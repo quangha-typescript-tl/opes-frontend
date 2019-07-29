@@ -4,7 +4,7 @@
 <script lang="ts">
   import {Component, Vue, Prop} from 'vue-property-decorator'
   import LayoutDefault from '../../../layouts/LayoutDefault.vue'
-  // import DialogService from '../../../../services/dialog.service'
+  import DialogService from '../../../../services/dialog.service'
   import RegistrationService from '../../../../services/registration.service'
   import ShareValueService from '../../../../services/shareValue.service'
   import FaceIcon from "@/components/FaceIcon/FaceIcon.vue"
@@ -36,11 +36,14 @@
     }
 
     getListUser() {
+      DialogService.setLoaderVisible(true);
       RegistrationService.getListUser().then(
         (res) => {
+          DialogService.setLoaderVisible(false);
           this.listUser = res['data']['users'];
         }
       ).catch((error) => {
+        DialogService.setLoaderVisible(false);
         console.log(error);
       })
     }

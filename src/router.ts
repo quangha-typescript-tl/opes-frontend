@@ -2,23 +2,30 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './resources/views/Home.vue'
 import About from './resources/views/About.vue'
+import PageNotFound from './resources/views/PageNotFound.vue'
 import ListUser from './resources/views/re/ListUser/ListUser.vue'
-import AddUser from './resources/views/re/AddUser/AddUser.vue'
+import AdminUser from './resources/views/re/AdminUser/AdminUser.vue'
 import ChangePassword from './resources/views/re/ChangePassword/ChangePassword.vue'
 import ListDepartment from './resources/views/re/ListDepartment/ListDepartment.vue'
 
 import Login from './resources/views/re/Login/Login.vue'
+import AuthenticationService from "@/services/authentication.service";
 
 Vue.use(Router)
 
-export default new Router({
+const router =  new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
+      path: "*",
+      component: PageNotFound
+    },
+    {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      meta: { userLogin: true}
     },
     {
       path: '/',
@@ -33,30 +40,49 @@ export default new Router({
     {
       path: '/re/listUser',
       name: 'listUser',
-      component: ListUser
+      component: ListUser,
+      meta: { requiresAuth: true}
     },
     {
-      path: '/re/addUser',
-      name: 'addUser',
-      component: AddUser
+      path: '/re/adminUser',
+      name: 'adminUser',
+      component: AdminUser,
+      meta: { requiresAuth: true}
     },
     {
       path: '/re/changePassword',
       name: 'changePassword',
-      component: ChangePassword
+      component: ChangePassword,
+      meta: { requiresAuth: true}
     },
     {
       path: '/re/listDepartment',
       name: 'listDepartment',
-      component: ListDepartment
-    },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (about.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    // }
+      component: ListDepartment,
+      meta: { requiresAuth: true}
+    }
   ]
-})
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    if (AuthenticationService.isLogin()) {
+      next();
+    } else {
+      next({path: '/login'});
+    }
+  }
+
+  if (to.meta.userLogin) {
+    if (AuthenticationService.isLogin()) {
+      next({path: '/re/listUser'});
+    } else {
+      next();
+    }
+  }
+
+  next();
+
+});
+
+export default router;

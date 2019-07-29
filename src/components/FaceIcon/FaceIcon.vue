@@ -21,7 +21,6 @@
     public mail: string | undefined;
 
     created() {
-      console.log(this.avatar);
       this.updateFaceIcon();
     }
 

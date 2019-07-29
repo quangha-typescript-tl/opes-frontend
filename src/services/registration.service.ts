@@ -22,6 +22,13 @@ export class RegistrationService extends BaseService {
     return WebApi.post('/api/logout');
   }
 
+  updateUser(user: any) {
+    return WebApi.post('/api/re/updateUser', user);
+  }
+  deleteUser(user: any) {
+    return WebApi.post('/api/re/deleteUser', user);
+  }
+
   changePassword(password: string, passwordConfirm: string) {
     return WebApi.post('/api/re/changePassword', {password: password, passwordConfirm: passwordConfirm});
   }
@@ -36,6 +43,9 @@ export class RegistrationService extends BaseService {
 
   saveDepartment(department: any) {
     return WebApi.post('/api/re/addDepartment', department);
+
+  deleteDepartment(department: any) {
+    return WebApi.post('/api/re/deleteDepartment', department);
   }
 }
 

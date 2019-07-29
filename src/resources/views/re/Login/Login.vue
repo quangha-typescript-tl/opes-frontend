@@ -18,6 +18,11 @@
 
     created() {
       this.$emit('update:layout', LayoutDefaultMain);
+      // ShareValueService.fetchUserSession().then((res) => {
+      //   if (res) {
+      //     this.$router.push('/re/listUser');
+      //   }
+      // });
     }
 
     login() {
@@ -26,6 +31,7 @@
           RegistrationService.login(this.email, this.password).then((res) => {
 
             ShareValueService.setAccessToken(res['data']['access_token']);
+            ShareValueService.fetchUserSession().then();
             this.$router.push('/re/listUser');
 
           }).catch((error) => {
