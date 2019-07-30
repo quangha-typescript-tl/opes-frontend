@@ -20,7 +20,7 @@
           <input class="form-control form-control-sm" v-model="department.description">
         </td>
         <td>
-          <button class="btn btn-sm btn-secondary mr-2" @click="deleteDepartment(department.id)" >Remove</button>
+          <button class="btn btn-sm btn-danger mr-2" @click="deleteDepartment(department.id)">Delete</button>
           <button class="btn btn-sm btn-success mr-2" v-if="department.id" @click="updateDepartment(department)">Update</button>
           <button class="btn btn-sm btn-success mr-2" v-if="!department.id" @click="saveDepartment(department)">Save</button>
         </td>

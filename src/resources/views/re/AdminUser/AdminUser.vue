@@ -26,23 +26,19 @@
 
     getListUser() {
       DialogService.setLoaderVisible(true);
-      RegistrationService.getListUser().then(
-        (res) => {
-          DialogService.setLoaderVisible(false);
-          this.listUser = res['data']['users'];
-        }
-      ).catch((error) => {
+      RegistrationService.getListUser().then((res) => {
+        DialogService.setLoaderVisible(false);
+        this.listUser = res['data']['users'];
+      }).catch((error) => {
         DialogService.setLoaderVisible(false);
         console.log(error);
       })
     }
 
     getDepartments() {
-      RegistrationService.getDepartments().then(
-        (res) => {
-          this.listDepartment = res['data']['departments'];
-        }
-      );
+      RegistrationService.getDepartments().then((res) => {
+        this.listDepartment = res['data']['departments'];
+      });
     }
 
     deleteUser(userId: number) {

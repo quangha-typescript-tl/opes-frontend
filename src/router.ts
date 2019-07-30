@@ -5,6 +5,7 @@ import About from './resources/views/About.vue'
 import PageNotFound from './resources/views/PageNotFound.vue'
 import ListUser from './resources/views/re/ListUser/ListUser.vue'
 import AdminUser from './resources/views/re/AdminUser/AdminUser.vue'
+import AddUser from './resources/views/re/AddUser/AddUser.vue'
 import ChangePassword from './resources/views/re/ChangePassword/ChangePassword.vue'
 import ListDepartment from './resources/views/re/ListDepartment/ListDepartment.vue'
 
@@ -47,6 +48,12 @@ const router =  new Router({
       path: '/re/adminUser',
       name: 'adminUser',
       component: AdminUser,
+      meta: { requiresAuth: true}
+    },
+    {
+      path: '/re/addUser',
+      name: 'addUser',
+      component: AddUser,
       meta: { requiresAuth: true}
     },
     {

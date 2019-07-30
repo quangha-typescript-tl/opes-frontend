@@ -1,11 +1,11 @@
 export class Departmenrt {
   public id: number | null;
-  public departmentNamr: string | null;
+  public departmentName: string | null;
   public description: string | null;
 
-  constructor(id: number | null, departmentNamr: string | null, description: string | null) {
+  constructor(id: number | null, departmentName: string | null, description: string | null) {
     this.id = id;
-    this.departmentNamr = departmentNamr;
+    this.departmentName = departmentName;
     this.description = description;
   }
 }

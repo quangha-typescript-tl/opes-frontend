@@ -43,9 +43,14 @@ export class RegistrationService extends BaseService {
 
   saveDepartment(department: any) {
     return WebApi.post('/api/re/addDepartment', department);
+  }
 
   deleteDepartment(department: any) {
     return WebApi.post('/api/re/deleteDepartment', department);
+  }
+
+  addUsers(model: any) {
+    return WebApi.post('/api/re/addUsers', model);
   }
 }
 
