@@ -5,16 +5,19 @@
   <table class="table table-bordered mt-4">
     <thead class="thead-light">
     <tr>
-      <th width="1">#</th>
-      <th width="20%">User Name</th>
-      <th width="20%">Email</th>
-      <th width="20%">Department</th>
+      <th width="5%">#</th>
+      <!--<td width="5%"></td>-->
+      <th width="15%">User Name</th>
+      <th width="15%">Email</th>
+      <th width="15%">Department</th>
+      <th width="15%">Temporary Password</th>
       <th width="150">Action</th>
     </tr>
     </thead>
     <tbody>
     <tr v-for="(user, index) in listUser" :key="index">
-      <td>{{ index + 1 }}</td>
+      <td><FaceIcon :avatar="user.avatar" :iconSize="40" /></td>
+      <!--<td><FaceIcon :avatar="user.avatar" :iconSize="40" /></td>-->
       <td :class="{'has-danger': errors.has('userName' + index)}">
         <span v-show="errors.has('userName' + index)" class="text-danger fs14">{{ errors.first('userName' + index) }}</span>
         <input class="form-control form-control-sm" v-model="user.userName" v-validate="'required'" :name="'userName' + index">
@@ -24,12 +27,14 @@
         <input class="form-control form-control-sm" v-model="user.email" v-validate="'required|email'" :name="'email' + index">
       </td>
       <td :class="{'has-danger': errors.has('department' + index)}">
-        <!--<input class="form-control form-control-sm" v-model="user.department">-->
         <span v-show="errors.has('department' + index)" class="text-danger fs14">{{ errors.first('department' + index) }}</span>
         <select class="form-control form-control-sm" v-model="user.department" v-validate="'required'" :name="'department' + index">
           <option value="">Select Department</option>
           <option v-for="department in listDepartment" :value="department.id">{{ department.departmentName }}</option>
         </select>
+      </td>
+      <td>
+       <span v-if="user.status == UserStatus.PROVISOPNAL">{{ user.temporaryPassword }}</span>
       </td>
       <td>
         <button class="btn btn-sm btn-danger mr-2" @click="deleteUser(user.id)">Delete</button>

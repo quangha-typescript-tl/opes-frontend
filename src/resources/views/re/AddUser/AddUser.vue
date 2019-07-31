@@ -79,8 +79,8 @@
             const department = user[2];
 
             let departmentId;
-            if(department && this.listDepartment.filter(item => item.departmentName === department).length === 1){
-              departmentId = this.listDepartment.filter(item => item.departmentName === department)[0].id;
+            if(department && this.listDepartment.filter(item =>item.departmentName.toLocaleLowerCase() === department.toLocaleLowerCase()).length === 1){
+              departmentId = this.listDepartment.filter(item => item.departmentName.toLocaleLowerCase() === department.toLocaleLowerCase())[0].id;
             }else{
               departmentId = this.listDepartment[0].id;
             }

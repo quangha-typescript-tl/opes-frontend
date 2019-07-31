@@ -6,22 +6,28 @@
   import LayoutDefault from '../../../layouts/LayoutDefault.vue'
   import PageHeader from "@/components/PageHeader/PageHeader.vue"
   import RegistrationService from '../../../../services/registration.service'
+  import FaceIcon from '@/components/FaceIcon/FaceIcon.vue'
   import DialogService from '@/services/dialog.service'
+  import { UserStatus } from '@/common/RegistrationCommon'
 
   @Component({
     components: {
-      PageHeader
+      PageHeader,
+      FaceIcon
     }
   })
   export default class AdminUser extends Vue {
+    public UserStatus: typeof UserStatus = UserStatus;
     public listUser: Array<any> = [];
     public listDepartment: Array<any> = [];
-
 
     created() {
       this.$emit('update:layout', LayoutDefault);
       this.getDepartments();
       this.getListUser();
+
+
+      console.log(UserStatus.PROVISOPNAL);
     }
 
     getListUser() {
