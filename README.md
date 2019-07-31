@@ -1,5 +1,10 @@
 # opes
 
+## node version
+```
+9.0.0
+```
+
 ## Project setup
 ```
 npm install
