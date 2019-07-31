@@ -53,9 +53,12 @@
     }
 
     onChangeFile(event: any) {
+
+      DialogService.setLoaderVisible(true);
       const file = event.target.files[0];
       if (!(file.name.match(/.+(\.xlsx|\.csv|\.xls)$/))) {
         console.log('select file');
+        DialogService.setLoaderVisible(false);
         return false;
       }
       const reader = new FileReader();
@@ -94,6 +97,7 @@
           }
 
           this.listUser = listUser;
+        DialogService.setLoaderVisible(false);
       };
     }
 

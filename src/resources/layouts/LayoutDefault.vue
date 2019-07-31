@@ -6,21 +6,16 @@
     <div class="page-wrap">
       <nav class="side-menu side-menu-hide">
         <div class="search search-side-menu">
+
+          <!--search input -->
           <form class="search-side-menu-form ng-untouched ng-pristine ng-valid">
             <input class="search-input ng-pristine ng-valid ng-touched" type="text"  placeholder="Searching">
             <button class="search-btn" type="submit">
               <i aria-hidden="true" class="fa fa-search"></i>
             </button>
-
-<!--            <ul>-->
-<!--              <li><router-link to="/listUser">List User</router-link></li>-->
-<!--              <li><router-link to="/addUser">Add User</router-link></li>-->
-<!--              <li>List User</li>-->
-<!--              <li>List User</li>-->
-<!--            </ul>-->
-
           </form>
 
+          <!--Router-->
           <div class="layout-blog">
             <div class="sidebar">
               <div class="inner">
@@ -37,8 +32,11 @@
         </div>
       </nav>
 
+      <!--Content Main-->
       <main class="content-wrap" data-effect="push">
-         <slot/>
+        <div class="container-fluid">
+          <slot/>
+        </div>
       </main>
     </div>
 
@@ -82,6 +80,11 @@
     position: relative;
     margin-left: 292px;
     top: 50px;
+
+    .container-fluid {
+      padding-right: 8px;
+      padding-left: 8px;
+    }
   }
 
   .layout-blog {

@@ -21,6 +21,7 @@
   export default class ListUser extends Vue {
     public listUser = [];
     public userSession = {};
+    public conditionsSearch = {name: '', department: '', status: ''};
 
     created() {
       this.$emit('update:layout', LayoutDefault);
@@ -37,7 +38,7 @@
 
     getListUser() {
       DialogService.setLoaderVisible(true);
-      RegistrationService.getListUser().then(
+      RegistrationService.getListUser(this.conditionsSearch).then(
         (res) => {
           DialogService.setLoaderVisible(false);
           this.listUser = res['data']['users'];

@@ -1,14 +1,15 @@
+import {UserStatus} from "../../../../common/RegistrationCommon";
 <template src="./AdminUser.html" />
 
 
 <script lang="ts">
-  import {Component, Vue, Prop } from 'vue-property-decorator'
+  import {Component, Vue} from 'vue-property-decorator'
   import LayoutDefault from '../../../layouts/LayoutDefault.vue'
   import PageHeader from "@/components/PageHeader/PageHeader.vue"
   import RegistrationService from '../../../../services/registration.service'
   import FaceIcon from '@/components/FaceIcon/FaceIcon.vue'
   import DialogService from '@/services/dialog.service'
-  import { UserStatus } from '@/common/RegistrationCommon'
+  import {UserStatus} from '@/common/RegistrationCommon'
 
   @Component({
     components: {
@@ -20,19 +21,48 @@
     public UserStatus: typeof UserStatus = UserStatus;
     public listUser: Array<any> = [];
     public listDepartment: Array<any> = [];
+    public conditionsSearch : any = {
+      name: '',
+      department: ['ALL'],
+      status: ['ALL']
+    };
+    private _conditionsSearch: any;
 
     created() {
       this.$emit('update:layout', LayoutDefault);
       this.getDepartments();
+      this.searchUser();
+    }
+
+    searchUser() {
+      let department: any[] | string = this.conditionsSearch.department;
+      let status: any[] | string = this.conditionsSearch.status;
+      const departmentAll = this.conditionsSearch.department.filter((de: any) => {
+        return de == 'ALL'
+      });
+      if (departmentAll.length > 0) {
+        department = ''
+      }
+
+      const statusAll = this.conditionsSearch.status.filter((st: any) => {
+        return st == 'ALL'
+      });
+      if (statusAll.length > 0) {
+        status = ''
+      }
+
+      this._conditionsSearch = {
+        name: this.conditionsSearch.name,
+        department: department,
+        status: status
+      };
+
       this.getListUser();
-
-
-      console.log(UserStatus.PROVISOPNAL);
     }
 
     getListUser() {
       DialogService.setLoaderVisible(true);
-      RegistrationService.getListUser().then((res) => {
+      RegistrationService.getListUser(this._conditionsSearch).then((res) => {
         DialogService.setLoaderVisible(false);
         this.listUser = res['data']['users'];
       }).catch((error) => {

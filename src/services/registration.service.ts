@@ -6,8 +6,12 @@ export class RegistrationService extends BaseService {
     super(props)
   }
 
-  getListUser() {
-    return WebApi.get('/api/re/getUsers');
+  getListUser(conditionsSearch: any) {
+    let params = new URLSearchParams();
+    params.append('name', conditionsSearch.name);
+    params.append('department', conditionsSearch.department);
+    params.append('status', conditionsSearch.status);
+    return WebApi.get('/api/re/getUsers', { params: params});
   }
 
   getDepartments() {

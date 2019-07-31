@@ -1,6 +1,25 @@
 <div class="mt-3">
   <PageHeader :title="'Admin User'" />
 
+  <div class="row search-user">
+    <input class="col-lg-6 mb-2" type="text" v-model="conditionsSearch.name" :placeholder="$t('ADD_USER.SEARCH.NAME')" @keydown.enter="searchUser" />
+    <div class="col-lg-4 mb-2">
+      <button type="button" class="btn btn-primary float-left" @click="searchUser">{{ $t('BTN.SEARCH') }}</button>
+    </div>
+  </div>
+  <div class="row search-user">
+    <select class="col-lg-3 form-control form-control-sm mb-2 mr-2" v-model="conditionsSearch.department" multiple="multiple">
+      <option value="ALL">All Department</option>
+      <option v-for="department in listDepartment" :value="department.id">{{ department.departmentName }}</option>
+    </select>
+    <select class="col-lg-3 form-control form-control-sm mb-2 mr-2" v-model="conditionsSearch.status" multiple="multiple">
+      <option value="ALL">All Status</option>
+      <option :value="UserStatus.PROVISOPNAL">PROVISOPNAL</option>
+      <option :value="UserStatus.ACTIVE">ACTIVE</option>
+      <option :value="UserStatus.BLOCK">BLOCK</option>
+    </select>
+
+  </div>
 
   <table class="table table-bordered mt-4">
     <thead class="thead-light">
