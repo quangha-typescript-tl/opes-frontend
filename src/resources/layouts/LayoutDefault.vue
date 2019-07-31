@@ -37,7 +37,7 @@
         </div>
       </nav>
 
-      <main class="content-wrap">
+      <main class="content-wrap" data-effect="push">
          <slot/>
       </main>
     </div>
@@ -124,8 +124,12 @@
   }
   
   @media (max-width: 991px) {
+    .content-wrap.push {
+      transform: translate(292px, 0);
+    }
     .content-wrap {
       margin-left: 0px;
+      transition: all 300ms;
     }
     .side-menu {
       left: -292px; }

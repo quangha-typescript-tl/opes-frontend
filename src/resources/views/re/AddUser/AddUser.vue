@@ -110,7 +110,7 @@
           // check validate success
         if (re) {
 
-          // Todo check email same
+          // Todo check duplicate same
           const model = {users: this.listUser};
           DialogService.setLoaderVisible(true);
           RegistrationService.addUsers(model).then((res) => {

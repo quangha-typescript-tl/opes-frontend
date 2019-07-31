@@ -20,15 +20,15 @@
       <div class="collapse navbar-collapse justify-content-end" id="nav-content">
         <ul class="navbar-nav">
 
-          <li class="nav-item dropdown support-dropdown-item">
+          <li class="nav-item dropdown support-dropdown-item" v-if="userSession">
             <a class="nav-link dropdown-toggle" href="#" id="support-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <FaceIcon :avatar="''" :iconSize="40" />
-              <span class="mini-profile-userinfo-name font-weight-bold">admin 1</span>
+              <FaceIcon :avatar="userSession.avatar" :iconSize="40" />
+              <span class="mini-profile-userinfo-name font-weight-bold">{{ userSession.userName }}</span>
             </a>
 
             <div class="dropdown-menu" aria-labelledby="support-dropdown">
               <div class="dropdown-item dropdown-profile">
-                <MiniProfile :userInfo="{lastName: 'admin', firstName: '1', avatar: ''}" :profileOptions="{iconSize: 75}" />
+                <MiniProfile :userInfo="{lastName: userSession.userName, firstName: '', avatar: userSession.avatar}" :profileOptions="{iconSize: 75}" />
               </div>
               <div class="dropdown-divider"></div>
 
@@ -53,7 +53,7 @@
   import FaceIcon from "@/components/FaceIcon/FaceIcon.vue";
   import RegistrationService from '../../services/registration.service'
   import ShareValueService from '../../services/shareValue.service'
-  declare const $: any;
+  import $ from 'jquery'
 
   @Component({
     components: {
@@ -63,62 +63,58 @@
   })
   export default class Header extends Vue {
 
-    public userInfo = {
-      lastName: 'admin',
-      avatar: ''
-    };
-    public sideMenu: any;
-    public contentWrap: any;
-    public contentWrapEffect: any;
-    public navbarBtnSideMenuToggle: any;
-    public windowHeight: any;
-    public windowWidth: any;
+    public userSession: any = {};
+    // public windowHeight: any;
+    // public windowWidth: any;
 
     created() {
-      console.log('Header');
-      // this.sideMenu = $('.side-menu');
-      // this.contentWrap = $('.content-wrap');
-      // this.contentWrapEffect = this.contentWrap.data('effect');
-      // this.navbarBtnSideMenuToggle = $('.navbar-btn-side-menu-toggle');
+      this.userSession = ShareValueService.getUserSession();
+      console.log(this.userSession);
+      if (!this.userSession) {
+        ShareValueService.fetchUserSession().then((res) => {
+          this.userSession = res;
+          console.log(this.userSession);
+        });
+      }
       // this.windowHeight = $(window).height() - 50;
       // this.windowWidth = $(window).width() < 991;
     }
 
     sideMenuToggle() {
-      // if (this.sideMenu.hasClass('side-menu-hide')) {
-      //   this.sideMenuShow();
-      // } else {
-      //   this.sideMenuHide();
-      // }
+      if ($('.side-menu') && $('.side-menu').hasClass('side-menu-hide')) {
+        this.sideMenuShow();
+      } else {
+        this.sideMenuHide();
+      }
     }
 
-    // sideMenuShow() {
-    //   this.sideMenu.addClass('side-menu-show').removeClass('side-menu-hide');
-    //   this.contentWrap.addClass(this.contentWrapEffect);
-    //   this.showOverflow();
-    //   this.navbarBtnSideMenuToggle.find('i').removeClass('fa-toggle-off').addClass('fa-toggle-on');
-    // }
-    //
-    // sideMenuHide() {
-    //   this.sideMenu.removeClass('side-menu-show').addClass('side-menu-hide');
-    //   this.contentWrap.removeClass(this.contentWrapEffect);
-    //   this.hideOverflow();
-    //   this.navbarBtnSideMenuToggle.find('i').removeClass('fa-toggle-on').addClass('fa-toggle-off');
-    // }
+    sideMenuShow() {
+      $('.side-menu').addClass('side-menu-show').removeClass('side-menu-hide');
+      $('.content-wrap').addClass($('.content-wrap').data('effect'));
+      // this.showOverflow();
+      $('.navbar-btn-side-menu-toggle').find('i').removeClass('fa-toggle-off').addClass('fa-toggle-on');
+    }
+
+    sideMenuHide() {
+      $('.side-menu').removeClass('side-menu-show').addClass('side-menu-hide');
+      $('.content-wrap').removeClass($('.content-wrap').data('effect'));
+      // this.hideOverflow();
+      $('.navbar-btn-side-menu-toggle').find('i').removeClass('fa-toggle-on').addClass('fa-toggle-off');
+    }
     //
     // showOverflow() {
     //   if (this.windowWidth) {
-    //     this.contentWrap.css({
+    //     $('.content-wrap').css({
     //       'height': this.windowHeight,
     //       'overflow-y': 'hidden'
     //     });
-    //     $('body').css('overflow-y', 'hidden');
+    //     $('body').css('overflow-y', 'hidden');R
     //   }
     // }
     //
     // hideOverflow() {
     //   if (this.windowWidth) {
-    //     this.contentWrap.css({
+    //     $('.content-wrap').css({
     //       'height': 'auto',
     //       'overflow-y': 'auto'
     //     });
