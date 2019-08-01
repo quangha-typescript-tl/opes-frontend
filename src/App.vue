@@ -44,6 +44,7 @@
   @import './assets/style/_import.scss';
   @import './assets/style/style.scss';
   @import '../node_modules/font-awesome/css/font-awesome.min.css';
+  @import '../node_modules/vue-select/dist/vue-select.css';
   // @import '../node_modules/bootstrap/scss/bootstrap';
   // @import '../node_modules/bootstrap-vue/src/index.scss';
   #app {
