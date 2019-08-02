@@ -3,226 +3,148 @@
     <!--<img alt="Vue logo" src="../../assets/logo.png">-->
     <!--<HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>-->
 
-
-    <!--<div id="app">-->
-      <!--<h1>Vue Select - Ajax</h1>-->
-      <!--<v-select label="name" :filterable="false" :options="options" @search="onSearch">-->
-        <!--<template slot="no-options">-->
-          <!--type to search GitHub repositories..-->
-        <!--</template>-->
-        <!--<template slot="option" slot-scope="option">-->
-          <!--<div class="d-center">-->
-            <!--<img :src='option.owner.avatar_url'/>-->
-            <!--{{ option.full_name }}-->
-          <!--</div>-->
-        <!--</template>-->
-        <!--<template slot="selected-option" slot-scope="option">-->
-          <!--<div class="selected d-center">-->
-            <!--<img :src='option.owner.avatar_url'/>-->
-            <!--{{ option.full_name }}-->
-          <!--</div>-->
-        <!--</template>-->
-      <!--</v-select>-->
-    <!--</div>-->
-
     <!--vSelect-->
-    <div class="select">
+    <div class="select ml-5">
 
-      <v-select v-model="user" :options="listUser" :filterable="false" @search="onSearch" />
+      <div class="mt-5">
+        <v-select class="style-chooser" placeholder="Select user" v-model="user" :options="listUser" label="userName" :reduce="u => u.id" :filterable="false" @search="onSearch">
+          <template slot="no-options">
+            Not Found User
+          </template>
 
-      <v-select v-model="value3" label="country"
-                :options="countrys"
-                :clearable="false"
-                maxHeight="50px"
-      />
-      <!--maxHeight: không set trong version > 3.-->
+          <template slot="option" slot-scope="u">
+            <FaceIcon :avatar="u.avatar" :iconSize="40" />
+            {{ u.userName }}
+          </template>
 
-      <v-select v-model="value2" label="country"
-                :options="countrys"
-                :reduce="country => country.id"
-                :clearable="false"
-                maxHeight="50px"
-                />
+          <template slot="selected-option" slot-scope="u">
+            <FaceIcon :avatar="u.avatar" :iconSize="30" />
+            {{ u.userName }}
+          </template>
+        </v-select>
+      </div>
 
+      <div class="mt-5">
+        <v-select class="style-chooser-1" v-model="user" :reduce="u => u.id" label="userName" :filterable="false" @search="onSearch"
+                  :options="listUser"
+                  maxHeight="50px">
+          <template slot="no-options">
+            Not Found User
+          </template>
 
-      <v-select :options="listDocs" label="title" placeholder="Select">
+          <template slot="option" slot-scope="u">
+            <FaceIcon :avatar="u.avatar" :iconSize="40" />
+            {{ u.userName }}
+          </template>
 
-        <template slot="option" slot-scope="doc">
-          <span class="fa" :class="doc.icon"></span>
-          {{ doc.title }}
-        </template>
+          <template slot="selected-option" slot-scope="u">
+            <FaceIcon :avatar="u.avatar" :iconSize="30" />
+            {{ u.userName }}
+          </template>
+        </v-select>
+      </div>
 
-      </v-select>
+      <div class="mt-5">
+        <!--maxHeight: không set trong version > 3.-->
+        <v-select v-model="user" label="userName" :filterable="false" @search="onSearch"
+                  :options="listUser"
+                  :reduce="u => u.id"
+                  :clearable="false"
+                  maxHeight="50px"
+        />
+      </div>
 
-      <!--<v-select :options="options" label="title">-->
-        <!--<template slot="option" slot-scope="option">-->
-          <!--<span :class="option.icon"></span>-->
-          <!--{{ option.title }}-->
-        <!--</template>-->
-      <!--</v-select>-->
-
-
+      <div class="mt-5">
+        <v-select v-model="users" label="userName" :filterable="false" @search="onSearch" :multiple="true"
+                  :options="listUser"
+                  :reduce="u => u.id"
+                  :clearable="false"
+                  maxHeight="50px"
+        />
+      </div>
     </div>
 
     <!--vSelect-->
+
+
+    <div class="mt-5 d-flex">
+      <input type="text" class="form-control" placeholder="Search user" style="width: 200px"/>
+      <date-picker class="ml-2" v-model="date1" lang="en" @change="changeDate()" :clearable="false"></date-picker>
+      <vue-timepicker class="ml-2" v-model="time" format="hh:mm" :minute-interval="5" :hide-clear-button="true" ></vue-timepicker>
+    </div>
 
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-import LayoutDefaultMain from '../layouts/LayoutDefaultMain.vue';
+import { Component, Vue } from 'vue-property-decorator'
+import HelloWorld from '@/components/HelloWorld.vue'
+import LayoutDefaultMain from '../layouts/LayoutDefaultMain.vue'
+import FaceIcon from '@/components/FaceIcon/FaceIcon.vue'
+import RegistrationService from '@/services/registration.service'
 
-// import VueAutosuggest from "vue-autosuggest";
 import vSelect from 'vue-select'
+import VueTimepicker from 'vue2-timepicker/src/vue-timepicker.vue'
+import DatePicker from 'vue2-datepicker'
+import moment from 'moment'
 
 @Component({
   components: {
     HelloWorld,
-    vSelect
+    FaceIcon,
+    vSelect,
+    VueTimepicker,
+    DatePicker
   },
+  directives: {
+  }
 })
 export default class Home extends Vue {
+  // vSelect
   public listUser = [];
+  public users = [];
   public user = '';
-  public value1 = '';
-  public value2: any = '';
-  public value3: any = {};
-  public countrys = [
-    {
-      country: "aaa1",
-      id: "a1"
-    },
-    {
-      country: "aaa2",
-      id: "a2"
-    },
-    {
-      country: "aaa3",
-      id: "a3"
-    },
-    {
-      country: "aaa4",
-      id: "a4"
-    },
-    {
-      country: "aaa1",
-      id: "a1"
-    },
-    {
-      country: "aaa2",
-      id: "a2"
-    },
-    {
-      country: "aaa3",
-      id: "a3"
-    },
-    {
-      country: "aaa4",
-      id: "a4"
-    },{
-      country: "aaa1",
-      id: "a1"
-    },
-    {
-      country: "aaa2",
-      id: "a2"
-    },
-    {
-      country: "aaa3",
-      id: "a3"
-    },
-    {
-      country: "aaa4",
-      id: "a4"
-    },
-    {
-      country: "aaa4",
-      id: "a4"
-    },{
-      country: "aaa1",
-      id: "a1"
-    },
-    {
-      country: "aaa2",
-      id: "a2"
-    },
-    {
-      country: "aaa3",
-      id: "a3"
-    },
-    {
-      country: "aaa4",
-      id: "a4"
-    },
-    {
-      country: "aaa4",
-      id: "a4"
-    },{
-      country: "aaa1",
-      id: "a1"
-    },
-    {
-      country: "aaa2",
-      id: "a2"
-    },
-    {
-      country: "aaa3",
-      id: "a3"
-    },
-    {
-      country: "aaa4",
-      id: "a4"
-    }
-  ];
+  public userSelect = null;
+  public conditionsSearch = {
+    name: ''
+  };
 
+  // Vue Time picker
+  public time = {
+    hh: '08',
+    mm: '00'
+  };
 
-  public listDocs = [
-    {
-      title: 'Read the Docs',
-      icon: 'fa-book',
-      url: 'https://codeclimate.com/github/sagalbot/vue-select'
-    },
-    {
-      title: 'View on GitHub',
-      icon: 'fa-github',
-      url: 'https://codeclimate.com/github/sagalbot/vue-select'
-    },
-    {
-      title: 'View on NPM',
-      icon: 'fa-database',
-      url: 'https://codeclimate.com/github/sagalbot/vue-select'
-    },
-    {
-      title: 'View Codepen Examples',
-      icon: 'fa-pencil',
-      url: 'https://codeclimate.com/github/sagalbot/vue-select'
-    }
-  ];
+  public date1 = moment().format('YYYY-MM-DD');
+  public date2 = '';
+  public date3 = '';
 
   created() {
     this.$emit('update:layout', LayoutDefaultMain);
   }
 
-  onSearch(textSearch, loading) {
-    console.log(textSearch);
-    loading(true);
+  onSearch(search, loading) {
+    if (!search) {
+      this.listUser = [];
+      return;
+    }
 
-    setTimeout(() => {
-      this.listUser = ['1', '2', '3'];
+    loading(true);
+    this.conditionsSearch.name = search;
+
+    RegistrationService.getListUser(this.conditionsSearch).then((res) => {
+      this.listUser = res['data']['users'];
+      loading(false);
+    }).catch((error) => {
+      console.log(error);
       loading(false);
     });
 
+  }
 
-
-      // fetch(
-      //   `https://api.github.com/search/repositories?q=${escape(search)}`
-      // ).then(res => {
-      //   res.json().then(json => (this.listUser = json.items));
-      //   loading(false);
-      // });
-
+  changeDate() {
+    // console.log(event);
+    this.date1 = moment(this.date1).format('YYYY-MM-DD');
   }
 }
 </script>
@@ -233,15 +155,71 @@ export default class Home extends Vue {
     margin: auto 0px;
   }
 
-  .dropdown li a {
-    padding: 10px 20px;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    font-size: 1.25em;
+  .style-chooser {
+    .vs__search {
+      height: 30px !important;
+    }
+
+    .vs__no-options {
+      padding: 3px 0px;
+    }
+
+    .vs__dropdown-menu {
+      border: 1px solid rgba(60,60,60,.26);
+      padding: 0px;
+
+      .vs__dropdown-option {
+        border-bottom: 1px solid rgba(60,60,60,.26);
+      }
+    }
   }
 
-  .dropdown li a .fa {
-    padding-right: 0.5em;
+  .style-chooser-1 {
+    .vs__dropdown-menu {
+      border: 1px solid rgba(60, 60, 60, .26);
+    }
+  }
+
+  // custom css time-picker
+  .time-picker {
+    width: 6em;
+    .display-time {
+      width: 6em !important;
+      height: 32px !important;
+      text-align: center;
+      border-radius: 0.25rem;
+      color: #495057;
+    }
+    .dropdown {
+      width: 6em;
+      .select-list {
+        width: 6em;
+      }
+
+      ul.hours {
+        border-left: 1px solid #fff;
+      }
+
+      ul {
+        li.active, li.active:hover {
+          background: #007bff;
+        }
+      }
+    }
+  }
+
+  // custom css date-picker
+  .mx-datepicker {
+    width: 130px !important;
+    .mx-input {
+      padding: 0px 0px;
+      text-align: center;
+      height: 32px !important;
+      font-size: 1rem;
+      color: #495057 !important;
+    }
+    .mx-input-append {
+      display: none;
+    }
   }
 </style>
