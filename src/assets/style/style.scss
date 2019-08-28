@@ -63,9 +63,13 @@
   font-size: 1.875rem;
 }
 
+button:focus {
+  outline: 0;
+}
 
-
-
+.col-main-inner {
+  max-width: 1000px;
+}
 
 .form-group {
     margin-bottom: 1rem;
@@ -92,5 +96,50 @@ input.form-control {
 .has-danger {
   .form-control {
     border-color: #D21D29 !important;
+  }
+}
+
+// vue-select2
+.vs--searchable {
+  .vs__dropdown-menu {
+    border: 1px solid rgba(60,60,60,.26);
+    padding: 0px;
+
+    .vs__dropdown-option {
+      border-bottom: 1px solid rgba(60,60,60,.26);
+    }
+  }
+}
+.has-danger .vs__dropdown-toggle {
+  border-color: #D21D29 !important;
+}
+
+// hash-tag-content
+.hash-tag-content .vs__selected {
+  color: #F18D00;
+}
+.style-chooser {
+  .vs__dropdown-menu {
+    border: 1px solid rgba(60,60,60,.26);
+    padding: 0px;
+
+    .vs__dropdown-option {
+      border-bottom: 1px solid rgba(60,60,60,.26);
+    }
+  }
+}
+
+// custom-checkbox, custom-radio
+
+.custom-control {
+  .custom-control-input:checked ~ .custom-control-label::before {
+    color: #fff;
+    border-color: #F18D00 !important;
+    background-color: #F18D00 !important;
+  }
+  .custom-control-label {
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

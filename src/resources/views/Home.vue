@@ -73,15 +73,96 @@
       <vue-timepicker class="ml-2" v-model="time" format="hh:mm" :minute-interval="5" :hide-clear-button="true" ></vue-timepicker>
     </div>
 
+
+    <div class="mt-5 d-flex">
+      <input type="text" class="form-control" placeholder="Search user" style="width: 200px"/>
+      <date-picker class="ml-2" v-model="date2" lang="en" @change="changeDate()" :clearable="false"></date-picker>
+      <date-picker v-model="time2" lang="en" type="time" format="HH:mm" placeholder="Select Time" :clearable="false"></date-picker>
+    </div>
+
+    <div class="mt-5">
+      <v-select v-model="tags" label="userName" :filterable="false" @keyup="addTag($event)" :multiple="true"
+                :clearable="false"
+                maxHeight="50px"
+      />
+    </div>
+
+    <p>{{ nameUser| ToLowerCaseFilter }}</p>
+    <p>{{ nameUser| ToUpperCaseFilter }}</p>
+    <p> {{ '2018-12-01T08:00+07:00' | DateTimeFilter('YYYY-MM-DD (dd)') }}</p>
+    <p> {{ '2018-12-01T08:00+07:00' | DateTimeFilter('YYYY-MM-DD (ddd)') }}</p>
+
+
+    <div class="form-check-inline">
+      <b-form-checkbox id="checkbox-1" v-model="checkBox1" name="checkbox-1">
+        I accept the terms and use
+      </b-form-checkbox>
+
+      <!--<label class="custom-control custom-checkbox mr-4">-->
+        <!--<input type="checkbox" class="custom-control-input" v-model="checkBox.me" :checked="checkbox.me">-->
+        <!--<span class="custom-control-indicator"></span>-->
+        <!--<span class="custom-control-description">me1</span>-->
+      <!--</label>-->
+
+      <!--<label class="custom-control custom-checkbox mr-4">-->
+        <!--<input type="checkbox" class="custom-control-input" v-model="checkBox.me2" :checked="checkbox.me2">-->
+        <!--<span class="custom-control-indicator"></span>-->
+        <!--<span class="custom-control-description">me3</span>-->
+      <!--</label>-->
+
+      <!--<label class="custom-control custom-checkbox mr-4">-->
+        <!--<input type="checkbox" class="custom-control-input" v-model="checkBox.me3">-->
+        <!--<span class="custom-control-indicator"></span>-->
+        <!--<span class="custom-control-description">me3</span>-->
+      <!--</label>-->
+    </div>
+
+    <div>
+      <b-form-group label="Radios using sub-components">
+        <b-form-radio-group id="radio-group-2" v-model="selectedRadio" name="radio-sub-component">
+          <b-form-radio value="first">Toggle this custom radio</b-form-radio>
+          <b-form-radio value="second">Or toggle this other custom radio</b-form-radio>
+          <b-form-radio value="third" disabled>This one is Disabled</b-form-radio>
+        </b-form-radio-group>
+      </b-form-group>
+    </div>
+
+    <div class="form-check-inline">
+      <label class="custom-control custom-checkbox mr-4">
+        <input type="checkbox" class="custom-control-input" v-model="checkBox1" :checked="checkBox1">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">me1</span>
+      </label>
+
+      <label class="custom-control custom-checkbox mr-4">
+        <input type="checkbox" class="custom-control-input" v-model="checkBox2" :checked="checkBox2">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">me3</span>
+      </label>
+
+      <label class="custom-control custom-checkbox mr-4">
+        <input type="checkbox" class="custom-control-input" v-model="checkBox3">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">me3</span>
+      </label>
+    </div>
+
+
+    <div class="overflow-auto">
+      <b-pagination-nav :link-gen="linkGen" :number-of-pages="10" use-router></b-pagination-nav>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import HelloWorld from '@/components/HelloWorld.vue'
-import LayoutDefaultMain from '../layouts/LayoutDefaultMain.vue'
-import FaceIcon from '@/components/FaceIcon/FaceIcon.vue'
-import RegistrationService from '@/services/registration.service'
+import { Component, Vue } from 'vue-property-decorator';
+import HelloWorld from '@/components/HelloWorld.vue';
+import LayoutDefaultMain from '@/resources/layouts/LayoutDefaultMain.vue';
+import LayoutDefault from '@/resources/layouts/LayoutDefault.vue';
+import FaceIcon from '@/components/FaceIcon/FaceIcon.vue';
+import RegistrationService from '@/services/registration.service';
+import DialogService from '@/services/dialog.service';
+import { DialogResult } from '@/models/DialogParams';
 
 import vSelect from 'vue-select'
 import VueTimepicker from 'vue2-timepicker/src/vue-timepicker.vue'
@@ -101,6 +182,9 @@ import moment from 'moment'
 })
 export default class Home extends Vue {
   // vSelect
+  public checkBox = {
+    me: true,
+  };
   public listUser = [];
   public users = [];
   public user = '';
@@ -116,14 +200,24 @@ export default class Home extends Vue {
   };
 
   public date1 = moment().format('YYYY-MM-DD');
-  public date2 = '';
+  public date2 = moment().format('YYYY-MM-DD');
+  public time2 = '';
   public date3 = '';
 
+  public tags = [];
+  public nameUser = "anh bang";
+
+  public checkBox1 = true;
+  public checkBox2 = false;
+  public checkBox3 = true;
+
+  public selectedRadio = 'first';
+
   created() {
-    this.$emit('update:layout', LayoutDefaultMain);
+    this.$emit('update:layout', LayoutDefault);
   }
 
-  onSearch(search, loading) {
+  onSearch(search: any, loading: any) {
     if (!search) {
       this.listUser = [];
       return;
@@ -145,6 +239,20 @@ export default class Home extends Vue {
   changeDate() {
     // console.log(event);
     this.date1 = moment(this.date1).format('YYYY-MM-DD');
+  }
+
+  clickOutsideDatePicker() {
+    // mx-datepicker-popup
+    $('.mx-datepicker-popup').hide();
+  }
+
+  addTag(event: any) {
+    console.log(event);
+  }
+
+  linkGen(pageNum: number) {
+    // console.log(pageNum);
+    return pageNum === 1 ? '?' : `?page=${pageNum}`
   }
 }
 </script>

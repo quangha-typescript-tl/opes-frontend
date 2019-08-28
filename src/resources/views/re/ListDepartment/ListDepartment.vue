@@ -1,16 +1,15 @@
 <template src="./ListDepartment.html"/>
 
-
 <script lang="ts">
-  import {Component, Vue, Prop} from 'vue-property-decorator'
-  import LayoutDefault from '../../../layouts/LayoutDefault.vue'
-  import DialogService from '../../../../services/dialog.service'
-  import RegistrationService from '../../../../services/registration.service'
-  import ShareValueService from '../../../../services/shareValue.service'
-  import FaceIcon from "@/components/FaceIcon/FaceIcon.vue"
-  import MiniProfile from "@/components/MiniProfile/MiniProfile.vue"
-  import PageHeader from "@/components/PageHeader/PageHeader.vue"
-  import {Departmenrt} from "@/models/re/Departmenrt";
+  import {Component, Vue, Prop} from 'vue-property-decorator';
+  import LayoutDefault from '../../../layouts/LayoutDefault.vue';
+  import DialogService from '../../../../services/dialog.service';
+  import RegistrationService from '../../../../services/registration.service';
+  import ShareValueService from '../../../../services/shareValue.service';
+  import FaceIcon from "@/components/FaceIcon/FaceIcon.vue";
+  import MiniProfile from "@/components/MiniProfile/MiniProfile.vue";
+  import PageHeader from "@/components/PageHeader/PageHeader.vue";
+  import {Department} from "@/models/re/Department";
 
   @Component({
     components: {
@@ -20,7 +19,7 @@
     }
   })
   export default class ListDepartment extends Vue {
-    public listDepartment : Array<Departmenrt> = [];
+    public listDepartment : Array<Department> = [];
     public userSession = {};
 
     created() {
@@ -45,7 +44,7 @@
         }
       ).catch((error) => {
         DialogService.setLoaderVisible(false);
-        console.log(error);
+        DialogService.showError(this.$t('MSG.ERROR'), this.$t('BTN.OK'));
       });
     }
 
@@ -57,13 +56,13 @@
       RegistrationService.deleteDepartment(model).then(
         (res) => {
           DialogService.setLoaderVisible(false);
-          console.log('success');
-
-          this.getDepartment();
+          DialogService.showSuccess(this.$t('MSG.SUCCESS'), this.$t('BTN.OK')).subscribe((res: any) => {
+            this.getDepartment();
+          });
         }
       ).catch((error) => {
         DialogService.setLoaderVisible(false);
-        console.log(error);
+        DialogService.showError(this.$t('MSG.ERROR'), this.$t('BTN.OK'));
       });
     }
 
@@ -72,27 +71,30 @@
       RegistrationService.updateDepartment(department).then(
         (res) => {
           DialogService.setLoaderVisible(false);
-          console.log('success');
+          DialogService.showSuccess(this.$t('MSG.SUCCESS'), this.$t('BTN.OK'));
         }
       ).catch((error) => {
         DialogService.setLoaderVisible(false);
-        console.log(error);
+        DialogService.showError(this.$t('MSG.ERROR'), this.$t('BTN.OK'));
       });
     }
 
     addDepartment() {
-      const department = new Departmenrt(null, null, null);
+      const department = new Department(null, null, null);
       this.listDepartment.push(department);
     }
 
-    saveDepartment(department: Departmenrt) {
+    saveDepartment(department: Department) {
+      DialogService.setLoaderVisible(true);
       RegistrationService.saveDepartment(department).then((res) => {
-        console.log(res);
+        DialogService.setLoaderVisible(false);
+        DialogService.showSuccess(this.$t('MSG.SUCCESS'), this.$t('BTN.OK'));
       }).catch((error) => {
-        console.log(error);
+        DialogService.setLoaderVisible(false);
+        DialogService.showError(this.$t('MSG.ERROR'), this.$t('BTN.OK'));
       })
     }
   }
 </script>
 
-<style lang="scss" src="./ListDepartment.scss"/>
+<style lang="scss" src="./ListDepartment.scss" />

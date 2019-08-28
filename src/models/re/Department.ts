@@ -1,4 +1,4 @@
-export class Departmenrt {
+export class Department {
   public id: number | null;
   public departmentName: string | null;
   public description: string | null;

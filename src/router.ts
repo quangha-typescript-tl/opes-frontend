@@ -1,18 +1,23 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './resources/views/Home.vue'
-import About from './resources/views/About.vue'
-import PageNotFound from './resources/views/PageNotFound.vue'
-import ListUser from './resources/views/re/ListUser/ListUser.vue'
-import AdminUser from './resources/views/re/AdminUser/AdminUser.vue'
-import AddUser from './resources/views/re/AddUser/AddUser.vue'
-import ChangePassword from './resources/views/re/ChangePassword/ChangePassword.vue'
-import ListDepartment from './resources/views/re/ListDepartment/ListDepartment.vue'
+import Vue from 'vue';
+import Router from 'vue-router';
+import Home from './resources/views/Home.vue';
+import About from './resources/views/About.vue';
+import PageNotFound from './resources/views/PageNotFound.vue';
+import ListUser from './resources/views/re/ListUser/ListUser.vue';
+import AdminUser from './resources/views/re/AdminUser/AdminUser.vue';
+import AddUser from './resources/views/re/AddUser/AddUser.vue';
+import ChangePassword from './resources/views/re/ChangePassword/ChangePassword.vue';
+import ListDepartment from './resources/views/re/ListDepartment/ListDepartment.vue';
 
-import Login from './resources/views/re/Login/Login.vue'
+import Login from './resources/views/re/Login/Login.vue';
 import AuthenticationService from "@/services/authentication.service";
+import AddContent from "@/resources/views/co/AddContent/AddContent.vue";
+import ListContent from "@/resources/views/co/ListContent/ListContent.vue";
+import AdminContent from "@/resources/views/co/AdminContent/AdminContent.vue";
+import DetailContent from "@/resources/views/co/DetailContent/DetailContent.vue";
+import EditContent from "@/resources/views/co/EditContent/EditContent.vue";
 
-Vue.use(Router)
+Vue.use(Router);
 
 const router =  new Router({
   mode: 'history',
@@ -67,7 +72,37 @@ const router =  new Router({
       name: 'listDepartment',
       component: ListDepartment,
       meta: { requiresAuth: true}
-    }
+    },
+    {
+      path: '/co/addContent',
+      name: 'addContent',
+      component: AddContent,
+      meta: { requiresAuth: true}
+    },
+    {
+      path: '/co/listContent',
+      name: 'listContent',
+      component: ListContent,
+      meta: { requiresAuth: true}
+    },
+    {
+      path: '/co/adminContent',
+      name: 'adminContent',
+      component: AdminContent,
+      meta: { requiresAuth: true}
+    },
+    {
+      path: '/co/detailContent/:contentId',
+      name: 'detailContent',
+      component: DetailContent,
+      meta: { requiresAuth: true}
+    },
+    {
+      path: '/co/editContent/:contentId',
+      name: 'editContent',
+      component: EditContent,
+      meta: { requiresAuth: true}
+    },
   ]
 });
 
@@ -87,9 +122,7 @@ router.beforeEach((to, from, next) => {
       next();
     }
   }
-
   next();
-
 });
 
 export default router;

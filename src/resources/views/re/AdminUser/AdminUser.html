@@ -58,6 +58,9 @@
       <td>
         <button class="btn btn-sm btn-danger mr-2" @click="deleteUser(user.id)">Delete</button>
         <button class="btn btn-sm btn-success mr-2" @click="saveUser(user)">Save</button>
+        <button class="btn btn-sm btn-warning mr-2 btn-status-user" v-if="user.status === UserStatus.ACTIVE" @click="setUserStatus(user.id, UserStatus.BLOCK)">Block</button>
+        <button class="btn btn-sm btn-warning mr-2 btn-status-user" v-if="user.status === UserStatus.BLOCK" @click="setUserStatus(user.id, UserStatus.ACTIVE)">UnBlock</button>
+        <button class="mr-2 btn-status-user btn-status-user-visibility" v-if="user.status === UserStatus.PROVISOPNAL"></button>
       </td>
     </tr>
     </tbody>

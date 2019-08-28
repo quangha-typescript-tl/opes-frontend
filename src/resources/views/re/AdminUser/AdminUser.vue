@@ -1,15 +1,14 @@
-import {UserStatus} from "../../../../common/RegistrationCommon";
 <template src="./AdminUser.html" />
 
-
 <script lang="ts">
-  import {Component, Vue} from 'vue-property-decorator'
-  import LayoutDefault from '../../../layouts/LayoutDefault.vue'
-  import PageHeader from "@/components/PageHeader/PageHeader.vue"
-  import RegistrationService from '../../../../services/registration.service'
-  import FaceIcon from '@/components/FaceIcon/FaceIcon.vue'
-  import DialogService from '@/services/dialog.service'
-  import {UserStatus} from '@/common/RegistrationCommon'
+  import {Component, Vue} from 'vue-property-decorator';
+  import LayoutDefault from '../../../layouts/LayoutDefault.vue';
+  import PageHeader from "@/components/PageHeader/PageHeader.vue";
+  import RegistrationService from '../../../../services/registration.service';
+  import FaceIcon from '@/components/FaceIcon/FaceIcon.vue';
+  import DialogService from '@/services/dialog.service';
+  import {UserStatus} from '@/common/RegistrationCommon';
+  import {DialogResult} from "@/models/DialogParams";
 
   @Component({
     components: {
@@ -62,12 +61,12 @@ import {UserStatus} from "../../../../common/RegistrationCommon";
 
     getListUser() {
       DialogService.setLoaderVisible(true);
-      RegistrationService.getListUser(this._conditionsSearch).then((res) => {
+      RegistrationService.getListUser(this._conditionsSearch).then((res: any) => {
         DialogService.setLoaderVisible(false);
         this.listUser = res['data']['users'];
       }).catch((error) => {
         DialogService.setLoaderVisible(false);
-        console.log(error);
+        DialogService.showError(this.$t('MSG.ERROR'), this.$t('BTN.OK'));
       })
     }
 
@@ -84,12 +83,47 @@ import {UserStatus} from "../../../../common/RegistrationCommon";
 
       DialogService.setLoaderVisible(true);
       RegistrationService.deleteUser(model).then((res) => {
-        console.log('delete user success');
-
-        this.getListUser();
+        DialogService.showSuccess(this.$t('RE.ADMIN_USER.MSG.DELETE_USER_SUCCESS'), this.$t('BTN.OK')).subscribe(
+          (res: DialogResult) => {
+            if (res.isOk()) {
+              this.getListUser();
+            }
+          }
+        )
       }).catch((error) => {
         DialogService.setLoaderVisible(false);
-        console.log('error');
+        DialogService.showError(this.$t('MSG.ERROR'), this.$t('BTN.OK'));
+      })
+    }
+
+    setUserStatus(userId: number, status: UserStatus) {
+      const model = {
+        userId: userId,
+        status: status
+      };
+
+      if (status === UserStatus.BLOCK) {
+        DialogService.showModal('warning', false, this.$t('RE.ADMIN_USER.BLOCK_USER'), null, null, this.$t('BTN.OK'), this.$t('BTN.CANCEL'), 'ModalCheckBox',
+          {checkBox: false, disable: true}, null, null, null).subscribe(
+          (res: DialogResult) => {
+            if (res.isOk()) {
+              this.postUserStatus(model);
+            }
+          });
+      } else {
+        this.postUserStatus(model);
+      }
+    }
+
+    postUserStatus(model: any) {
+      DialogService.setLoaderVisible(true);
+      RegistrationService.setUserStatus(model).then((res) => {
+        DialogService.showSuccess(this.$t('MSG.SUCCESS'), this.$t('BTN.OK')).subscribe((res: any) => {
+          this.getListUser();
+        });
+      }).catch((error) => {
+        DialogService.setLoaderVisible(false);
+        DialogService.showError(this.$t('MSG.ERROR'), this.$t('BTN.OK'));
       })
     }
 
@@ -107,10 +141,10 @@ import {UserStatus} from "../../../../common/RegistrationCommon";
             DialogService.setLoaderVisible(true);
             RegistrationService.updateUser(model).then((res) => {
               DialogService.setLoaderVisible(false);
-              console.log('update user success');
+              DialogService.showSuccess(this.$t('MSG.SUCCESS'), this.$t('BTN.OK'));
             }).catch((error) => {
               DialogService.setLoaderVisible(false);
-              console.log('error');
+              DialogService.showError(this.$t('MSG.ERROR'), this.$t('BTN.OK'));
             })
           }
 
@@ -121,4 +155,4 @@ import {UserStatus} from "../../../../common/RegistrationCommon";
   }
 </script>
 
-<style lang="scss" src="./AdminUser.scss"/>
+<style lang="scss" src="./AdminUser.scss" />

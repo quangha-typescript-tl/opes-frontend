@@ -1,15 +1,15 @@
 <template src="./AddUser.html" />
 
-
 <script lang="ts">
-  import {Component, Vue, Prop } from 'vue-property-decorator'
-  import LayoutDefault from '../../../layouts/LayoutDefault.vue'
-  import PageHeader from "@/components/PageHeader/PageHeader.vue"
-  import RegistrationService from '../../../../services/registration.service'
-  import DialogService from '@/services/dialog.service'
-  import {UserRegister} from "@/models/re/UserRegister"
-  import $ from 'jquery'
-  import XLSX from 'xlsx'
+  import {Component, Vue, Prop } from 'vue-property-decorator';
+  import LayoutDefault from '../../../layouts/LayoutDefault.vue';
+  import PageHeader from "@/components/PageHeader/PageHeader.vue";
+  import RegistrationService from '../../../../services/registration.service';
+  import DialogService from '@/services/dialog.service';
+  import {UserRegister} from "@/models/re/UserRegister";
+  import $ from 'jquery';
+  import XLSX from 'xlsx';
+  import {DialogResult} from "@/models/DialogParams";
 
   @Component({
     components: {
@@ -23,6 +23,7 @@
     created() {
       this.$emit('update:layout', LayoutDefault);
       this.getDepartments();
+      this.addUser();
     }
 
     getDepartments() {
@@ -57,7 +58,6 @@
       DialogService.setLoaderVisible(true);
       const file = event.target.files[0];
       if (!(file.name.match(/.+(\.xlsx|\.csv|\.xls)$/))) {
-        console.log('select file');
         DialogService.setLoaderVisible(false);
         return false;
       }
@@ -119,12 +119,15 @@
           DialogService.setLoaderVisible(true);
           RegistrationService.addUsers(model).then((res) => {
             DialogService.setLoaderVisible(false);
-            console.log('register user success');
-
+            DialogService.showSuccess(this.$t('RE.ADD_USER.MSG.ADD_USER_SUCCESS'), this.$t('BTN.OK')).subscribe(
+              (res: DialogResult) => {
+                this.listUser = [];
+                this.addUser();
+              }
+            );
           }).catch((error) => {
             DialogService.setLoaderVisible(false);
-            console.log('error');
-
+            DialogService.showError(this.$t('MSG.ERROR'), this.$t('BTN.OK'));
           });
         }
 
@@ -133,4 +136,4 @@
   }
 </script>
 
-<style lang="scss" src="./AddUser.scss"/>
+<style lang="scss" src="./AddUser.scss" />

@@ -32,6 +32,9 @@ export class RegistrationService extends BaseService {
   deleteUser(user: any) {
     return WebApi.post('/api/re/deleteUser', user);
   }
+  setUserStatus(user: any) {
+    return WebApi.post('/api/re/setUserStatus', user);
+  }
 
   changePassword(password: string, passwordConfirm: string) {
     return WebApi.post('/api/re/changePassword', {password: password, passwordConfirm: passwordConfirm});

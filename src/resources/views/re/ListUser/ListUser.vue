@@ -1,15 +1,14 @@
 <template src="./ListUser.html"/>
 
-
 <script lang="ts">
-  import {Component, Vue, Prop} from 'vue-property-decorator'
-  import LayoutDefault from '../../../layouts/LayoutDefault.vue'
-  import DialogService from '../../../../services/dialog.service'
-  import RegistrationService from '../../../../services/registration.service'
-  import ShareValueService from '../../../../services/shareValue.service'
-  import FaceIcon from "@/components/FaceIcon/FaceIcon.vue"
-  import MiniProfile from "@/components/MiniProfile/MiniProfile.vue"
-  import PageHeader from "@/components/PageHeader/PageHeader.vue"
+  import {Component, Vue, Prop} from 'vue-property-decorator';
+  import LayoutDefault from '../../../layouts/LayoutDefault.vue';
+  import DialogService from '../../../../services/dialog.service';
+  import RegistrationService from '../../../../services/registration.service';
+  import ShareValueService from '../../../../services/shareValue.service';
+  import FaceIcon from "@/components/FaceIcon/FaceIcon.vue";
+  import MiniProfile from "@/components/MiniProfile/MiniProfile.vue";
+  import PageHeader from "@/components/PageHeader/PageHeader.vue";
 
   @Component({
     components: {
@@ -45,7 +44,7 @@
         }
       ).catch((error) => {
         DialogService.setLoaderVisible(false);
-        console.log(error);
+        DialogService.showError(this.$t('RE.ADD_USER_MSG.ADD_USER_FAIL'), this.$t('BTN.OK'));
       })
     }
 
@@ -63,4 +62,4 @@
   }
 </script>
 
-<style lang="scss" src="./ListUser.scss"/>
+<style lang="scss" src="./ListUser.scss" />

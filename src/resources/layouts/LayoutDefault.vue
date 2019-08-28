@@ -24,6 +24,9 @@
                   <li class="javascript"><router-link to="/re/adminUser">Admin User</router-link></li>
                   <li class="javascript"><router-link to="/re/listDepartment">List Department</router-link></li>
                   <li class="javascript"><router-link to="/re/addUser">Add User</router-link></li>
+                  <li class="javascript"><router-link to="/co/listContent">List Content</router-link></li>
+                  <li class="javascript"><router-link to="/co/adminContent">Admin Content</router-link></li>
+                  <li class="javascript"><router-link to="/co/addContent">Add Content</router-link></li>
                 </ul>
               </div>
             </div>

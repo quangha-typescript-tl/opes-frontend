@@ -13,18 +13,20 @@
       <router-view :layout.sync="layout"/>
     </component>
 
+    <Modal></Modal>
 
   </div>
 </template>
 
 <script lang="ts">
-  import {Component, Vue} from 'vue-property-decorator'
-  import DialogService from './services/dialog.service'
-  import RegistrationService from './services/registration.service'
-  // import $ from 'jQuery'
+  import {Component, Vue} from 'vue-property-decorator';
+  import DialogService from './services/dialog.service';
+  import Modal from '@/components/Modal/Modal.vue';
 
   @Component({
-    components: {},
+    components: {
+      Modal
+    },
   })
   export default class App extends Vue {
     public listUser = [];
@@ -43,10 +45,10 @@
 <style lang="scss">
   @import './assets/style/_import.scss';
   @import './assets/style/style.scss';
+
   @import '../node_modules/font-awesome/css/font-awesome.min.css';
   @import '../node_modules/vue-select/dist/vue-select.css';
-  // @import '../node_modules/bootstrap/scss/bootstrap';
-  // @import '../node_modules/bootstrap-vue/src/index.scss';
+  @import '../node_modules/cropperjs/dist/cropper.min.css';
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;

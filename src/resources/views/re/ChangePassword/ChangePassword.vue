@@ -1,12 +1,11 @@
 <template src="./ChangePassword.html" />
 
-
 <script lang="ts">
-  import {Component, Vue, Prop } from 'vue-property-decorator'
-  import LayoutDefault from '../../../layouts/LayoutDefault.vue'
-  import RegistrationService from '../../../../services/registration.service'
-  import PageHeader from '@/components/PageHeader/PageHeader.vue'
-  import DialogService from '@/services/dialog.service'
+  import {Component, Vue, Prop } from 'vue-property-decorator';
+  import LayoutDefault from '../../../layouts/LayoutDefault.vue';
+  import RegistrationService from '../../../../services/registration.service';
+  import PageHeader from '@/components/PageHeader/PageHeader.vue';
+  import DialogService from '@/services/dialog.service';
 
   @Component({
     components: {
@@ -29,11 +28,11 @@
           RegistrationService.changePassword(this.password, this.passwordConfirm).then(
             (res) => {
               DialogService.setLoaderVisible(false);
-              console.log('success');
+              DialogService.showSuccess(this.$t('MSG.SUCCESS'), this.$t('BTN.OK'));
             }
           ).catch((error) => {
             DialogService.setLoaderVisible(false);
-            console.log(error);
+            DialogService.showError(this.$t('MSG.ERROR'), this.$t('BTN.OK'));
           });
         }
       });
@@ -42,4 +41,4 @@
   }
 </script>
 
-<style lang="scss" src="./ChangePassword.scss"/>
+<style lang="scss" src="./ChangePassword.scss" />
