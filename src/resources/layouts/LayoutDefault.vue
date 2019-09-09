@@ -15,23 +15,7 @@
             </button>
           </form>
 
-          <!--Router-->
-          <div class="layout-blog">
-            <div class="sidebar">
-              <div class="inner">
-                <ul class="primary-menu">
-                  <li class="javascript"><router-link to="/re/listUser">List User</router-link></li>
-                  <li class="javascript"><router-link to="/re/adminUser">Admin User</router-link></li>
-                  <li class="javascript"><router-link to="/re/listDepartment">List Department</router-link></li>
-                  <li class="javascript"><router-link to="/re/addUser">Add User</router-link></li>
-                  <li class="javascript"><router-link to="/co/listContent">List Content</router-link></li>
-                  <li class="javascript"><router-link to="/co/adminContent">Admin Content</router-link></li>
-                  <li class="javascript"><router-link to="/co/addContent">Add Content</router-link></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
+          <SideMenu />
         </div>
       </nav>
 
@@ -49,10 +33,12 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator';
   import Header from './Header.vue';
+  import SideMenu from '@/resources/layouts/SideMenu/SideMenu.vue';
 
   @Component({
     components: {
-      Header
+      Header,
+      SideMenu
     }
   })
   export default class LayoutDefault extends Vue {
@@ -89,45 +75,6 @@
       padding-left: 8px;
     }
   }
-
-  .layout-blog {
-    position: relative;
-    .sidebar {
-      /*position: fixed;*/
-      /*left: 0;*/
-      /*top: 0;*/
-      /*bottom: 0;*/
-      /*z-index: 3;*/
-      /*width: 200px;*/
-      .inner {
-        padding: 20px 10px 10px;
-      }
-    }
-  }
-
-  .primary-menu {
-    list-style: none;
-    border-top: 1px solid #777;
-    padding-left: 0px;
-    li {
-      border-bottom: 1px solid #777;;
-      position: relative;
-      padding: 9px 0 12px;
-      line-height: 1;
-      font-size: 1.2em;
-      cursor: pointer;
-      font-family: avo_bold,avo,arial,sans-serif;
-
-      a {
-        color: #777;
-      }
-      &:hover {
-        color: #f47631;
-        background: #fbceb6;
-        // padding-left: 10px;
-      }
-    }
-  }
   
   @media (max-width: 991px) {
     .content-wrap.push {
@@ -137,11 +84,6 @@
       margin-left: 0px;
       transition: all 300ms;
     }
-    .side-menu {
-      left: -292px; }
-
-    .side-menu.side-menu-show {
-      left: 0; }
   }
 </style>
 

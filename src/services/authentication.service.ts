@@ -1,11 +1,12 @@
-import WebApi from '../common/interceptor/axios/WebApi'
 import BaseService from '../common/interceptor/BaseService';
-import ShareValueService from '@/services/shareValue.service'
+import ShareValueService from '@/services/shareValue.service';
+import WebApi from '../common/interceptor/axios/WebApi'
 import JwtDecode from 'jwt-decode';
 
 export class AuthenticationService extends BaseService {
 
   private _data: any;
+  private _canRefresh = true;
 
   constructor(props?: any) {
     super(props)
@@ -44,6 +45,35 @@ export class AuthenticationService extends BaseService {
       department: decoded.user.department,
       expire: decoded.exp
     };
+  }
+
+  refreshToken(callback?: any) {
+    if (!this._data || !this._canRefresh) {
+      return callback ? callback('Busy refresh token request') : null;
+    }
+    this._canRefresh = false;
+    console.log('*** RefreshToken');
+
+    const refreshToken = localStorage.getItem('access_token');
+    if (!refreshToken) {
+      const reason = 'Unsupported refresh token';
+
+      console.log(reason);
+      return callback ? callback(reason) : null;
+    }
+
+    let params = new URLSearchParams();
+    params.append('access_token', refreshToken);
+
+    WebApi.get('/api/refreshToken', {params: params}).then((res: any) => {
+      ShareValueService.setAccessToken(res['data']['access_token']);
+      ShareValueService.fetchUserSession().then();
+      this._canRefresh = true;
+    }).catch((error: any) => {
+      console.log('*** error refresh token: ', error);
+      this._canRefresh = true;
+      return callback ? callback(error) : null;
+    });
   }
 }
 

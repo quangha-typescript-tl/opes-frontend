@@ -1,5 +1,5 @@
 import axios from 'axios'
-import BaseService from "@/common/interceptor/BaseService";
+import AuthenticationService from "@/services/authentication.service";
 
 const webApi = axios.create({
   baseURL: process.env.VUE_APP_API_URL,
@@ -8,11 +8,13 @@ const webApi = axios.create({
 
 webApi.interceptors.request.use( (config) => {
 
-  const token = localStorage.getItem('access_token');
+  if (!AuthenticationService.isEnableExpire()) {
+    AuthenticationService.refreshToken();
+  }
 
+  const token = localStorage.getItem('access_token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
-    // webApi.defaults.headers.common['Authorization'] = 'Bearer ' + token;
   }
   return config;
 });

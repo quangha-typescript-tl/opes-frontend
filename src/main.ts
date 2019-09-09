@@ -2,11 +2,11 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import i18n from './config/i18n-setup';
+import "@/common/Filter";
 
 import VeeValidate from 'vee-validate';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import 'bootstrap';
-import moment from 'moment';
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
@@ -33,20 +33,6 @@ Vue.use(BootstrapVue);
 //     document.removeEventListener('touchstart', handleOutsideClick);
 //   }
 // });
-
-Vue.filter('ToUpperCaseFilter', function (value: any) {
-  return value.toUpperCase();
-});
-Vue.filter('ToLowerCaseFilter', function (value: any) {
-  return value.toLowerCase();
-});
-Vue.filter('DateTimeFilter', function (value: any, typeFormat: string) {
-  // YYYY-MM-DD (ddd), YYYY-MM-DD (dd)
-  if (moment(value).isValid()) {
-    return moment(value).format(typeFormat);
-  }
-  return null;
-});
 
 new Vue({
   router,
