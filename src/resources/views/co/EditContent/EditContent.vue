@@ -95,8 +95,32 @@
     }
 
     setSelected(value: any) {
-      console.log(value);
       this.content.hash_tag = value;
+    }
+
+    imageAdded(file: any, Editor: any, cursorLocation: any) {
+      const formData = new FormData();
+      const fileName = this.userSession['id'] + '_' + moment().format('YYYYMMDDTHHmmssSSS') + '_' + file.name;
+      formData.append('image', file, fileName);
+
+      DialogService.setLoaderVisible(true);
+      ContentService.uploadImageContent(formData).then((res) => {
+        DialogService.setLoaderVisible(false);
+        Editor.insertEmbed(cursorLocation, 'image', this.link_image_content + fileName);
+      }).catch((error) => {
+        DialogService.setLoaderVisible(false);
+      });
+    }
+
+    imageRemoved(url: any, Editor: any, cursorLocation: any) {
+      const index = url.lastIndexOf('/');
+      const nameImage = url.substr(index + 1);
+      DialogService.setLoaderVisible(true);
+      ContentService.removeImageContent(nameImage).then((res) => {
+        DialogService.setLoaderVisible(false);
+      }).catch((error) => {
+        DialogService.setLoaderVisible(false);
+      });
     }
 
     checkValidateContent() {

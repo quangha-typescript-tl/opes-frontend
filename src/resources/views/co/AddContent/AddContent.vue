@@ -6,6 +6,7 @@
   import PageHeader from "@/components/PageHeader/PageHeader.vue";
   import ImageCropper from "@/components/ImageCropper/ImageCropper.vue";
 
+  import {DialogResult} from "@/models/DialogParams";
   import {ContentRegister} from "@/models/co/ContentRegister";
 
   import ContentService from '@/services/content.service';
@@ -13,12 +14,13 @@
   import ShareValueService from '@/services/shareValue.service';
 
   import { PublicContent } from "@/common/ContentCommon";
+  import { Validator } from '@/common/Validator';
+  import { VUE_APP_API_URL_IMAGE } from '@/common/Helper';
 
-  import { VueEditor } from "vue2-editor";
   import moment from 'moment';
   import vSelect from 'vue-select';
-  import { Validator } from '@/common/Validator';
-  import {DialogResult} from "@/models/DialogParams";
+
+  import { VueEditor } from 'vue2-editor';
 
   @Component({
     components: {
@@ -35,6 +37,14 @@
     public userSession = {};
     public listHashTag = [];
     public errorHashTag = false;
+
+    public customToolbar = [
+      ["bold", "italic", "underline"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["image", "code-block"]
+    ];
+
+    public link_image_content = VUE_APP_API_URL_IMAGE;
 
     created() {
       this.$emit('update:layout', LayoutDefault);
@@ -67,6 +77,35 @@
       });
     }
 
+    imageAdded(file: any, Editor: any, cursorLocation: any) {
+      // console.log('file: ' + file);
+      // console.log('Editor: ' + Editor);
+      // console.log('cursorLocation: ' + cursorLocation);
+
+      const formData = new FormData();
+      const fileName = this.userSession['id'] + '_' + moment().format('YYYYMMDDTHHmmssSSS') + '_' + file.name;
+      formData.append('image', file, fileName);
+
+      DialogService.setLoaderVisible(true);
+      ContentService.uploadImageContent(formData).then((res) => {
+        DialogService.setLoaderVisible(false);
+        Editor.insertEmbed(cursorLocation, 'image', this.link_image_content + fileName);
+      }).catch((error) => {
+        DialogService.setLoaderVisible(false);
+      });
+    }
+
+    imageRemoved(url: any, Editor: any, cursorLocation: any) {
+      const index = url.lastIndexOf('/');
+      const nameImage = url.substr(index + 1);
+      DialogService.setLoaderVisible(true);
+      ContentService.removeImageContent(nameImage).then((res) => {
+        DialogService.setLoaderVisible(false);
+      }).catch((error) => {
+        DialogService.setLoaderVisible(false);
+      });
+    }
+
     checkValidateContent() {
       this.checkValidate = true;
     }
@@ -77,8 +116,8 @@
 
       if (image) {
         const fileName = this.userSession['id'] + '_' + moment().format('YYYYMMDDTHHmmssSSS') + '_' + image.name;
-          formData.append('image', image, fileName);
-          this.content.image = fileName
+        formData.append('image', image, fileName);
+        this.content.image = fileName;
       }
 
       this.errorHashTag = false;

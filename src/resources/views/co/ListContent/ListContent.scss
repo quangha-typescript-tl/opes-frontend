@@ -4,8 +4,6 @@
 
   .content {
     width: calc(100% - 160px);
-    height: 100px;
-    overflow-y: hidden;
 
     .title-content {
       font-family: "OpenSans-Bold", sans-serif;
@@ -21,16 +19,20 @@
     }
     .content-page {
       text-align: left;
+      max-height: 45px;
+      overflow-y: hidden;
     }
   }
   .image-content {
     width: 150px;
     height: 100px;
+    text-align: center;
 
     img {
       width: 100px;
       height: 100px;
     }
+
     .no-image {
       border: 1px solid #eceeef;
     }

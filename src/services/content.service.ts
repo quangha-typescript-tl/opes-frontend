@@ -6,8 +6,13 @@ export class ContentService extends BaseService {
     super(props)
   }
 
-  getListContent() {
-    return WebApi.get('/api/co/getContents');
+  getListContent(conditionSearch?: any) {
+    let params = new URLSearchParams();
+    params.append('hash_tag', conditionSearch ? conditionSearch.hash_tag : []);
+    params.append('typeDatePost', conditionSearch ? conditionSearch.typeDatePost : '');
+    params.append('dateStart', conditionSearch ? conditionSearch.dateStart : '');
+    params.append('dateEnd', conditionSearch ? conditionSearch.dateEnd : '');
+    return WebApi.get('/api/co/getContents', {params: params});
   }
   addContent(model: any) {
     return WebApi.post('/api/co/addContent', model);
@@ -22,6 +27,13 @@ export class ContentService extends BaseService {
 
   uploadImageContent(formData: any) {
     return WebApi.post('/api/co/uploadImageContent', formData);
+  }
+
+  removeImageContent(imageUrl: string) {
+    const data = {
+      imageUrl: imageUrl
+    };
+    return WebApi.post('/api/co/removeImageContent', data);
   }
 
   getDetailContent(contentId: string) {

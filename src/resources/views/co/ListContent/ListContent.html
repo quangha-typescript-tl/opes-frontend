@@ -1,17 +1,20 @@
 <div class="mt-3 col-main-inner">
   <PageHeader :title="$t('CO.LIST_CONTENT.TITLE')" />
 
-  <div class="row item-content" v-for="content in contents">
+  <div class="mt-5">
+    <div class="item-content" v-for="content in contents">
+      <div class="row">
+        <div class="image-content">
+          <img :src="link_image_content  + content.image" v-if="content.image">
+          <img :src="link_image_content_default" v-if="!content.image" class="no-image">
+        </div>
 
-    <div class="image-content">
-      <img :src="link_image_content  + content.image" v-if="content.image">
-      <img :src="link_image_content_default" v-if="!content.image" class="no-image">
-    </div>
-
-    <div class="ml-2 content">
-      <p class="title-content font-weight-bold fs20" @click="detailContent(content.id)">{{ content.title }}</p>
-      <div class="content-page">
-        {{ content.description }}
+        <div class="ml-2 content">
+          <p class="title-content font-weight-bold fs20" @click="detailContent(content.id)">{{ content.title }}</p>
+          <div class="content-page">
+            {{ content.description }}
+          </div>
+        </div>
       </div>
     </div>
   </div>

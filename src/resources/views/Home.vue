@@ -125,6 +125,12 @@
 
 
     <div class="mt-5 d-flex">
+      <select class="form-control">
+        <option value="111111">111111</option>
+        <option value="2222222">2222222</option>
+        <option value="333333">333333</option>
+        <option value="4444444">4444444</option>
+      </select>
       <input type="text" class="form-control" placeholder="Search user" style="width: 200px"/>
       <date-picker class="ml-2" v-model="date2" lang="en" @change="changeDate()" :clearable="false"></date-picker>
       <date-picker v-model="time2" lang="en" type="time" format="HH:mm" placeholder="Select Time" :clearable="false"></date-picker>

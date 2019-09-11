@@ -79,7 +79,11 @@
       "TITLE": "Detail content"
     },
     "ADMIN_CONTENT": {
-      "TITLE": "Admin content"
+      "TITLE": "Admin content",
+      "MSG": {
+        "REQUIRED_DATE": "Required",
+        "ERROR_DATE": "Error date validate"
+      }
     }
   }
 }

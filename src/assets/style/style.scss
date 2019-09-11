@@ -75,7 +75,7 @@ button:focus {
     margin-bottom: 1rem;
 }
 input.form-control {
-    height: 32px;
+    //height: 32px;
     padding-left: 0.5rem;
 }
 .form-control {
@@ -99,6 +99,20 @@ input.form-control {
   }
 }
 
+//mx-datepicker
+.mx-datepicker {
+  .mx-input {
+    height: 38px;
+  }
+}
+.has-danger {
+  .mx-datepicker {
+    .mx-input {
+      border-color: #D21D29 !important;
+    }
+  }
+}
+
 // vue-select2
 .vs--searchable {
   .vs__dropdown-menu {
@@ -118,7 +132,13 @@ input.form-control {
 .hash-tag-content .vs__selected {
   color: #F18D00;
 }
-.style-chooser {
+.v-select {
+  .vs__search {
+    height: 28px !important;
+  }
+  .vs__no-options {
+    padding: 3px 0px;
+  }
   .vs__dropdown-menu {
     border: 1px solid rgba(60,60,60,.26);
     padding: 0px;
@@ -130,7 +150,6 @@ input.form-control {
 }
 
 // custom-checkbox, custom-radio
-
 .custom-control {
   .custom-control-input:checked ~ .custom-control-label::before {
     color: #fff;

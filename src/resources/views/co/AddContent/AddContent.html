@@ -65,9 +65,11 @@
     <tr>
       <td>{{ $t('CO.ADD_CONTENT.CONTENT') }}</td>
       <td>
-        <vue-editor v-model="content.content"></vue-editor>
+        <!--:editorToolbar="customToolbar"-->
+        <vue-editor v-model="content.content" :useCustomImageHandler="true" @imageAdded="imageAdded" @imageRemoved="imageRemoved"></vue-editor>
       </td>
     </tr>
+
     </tbody>
   </table>
 

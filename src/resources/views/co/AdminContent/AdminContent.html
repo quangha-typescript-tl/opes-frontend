@@ -1,8 +1,54 @@
 <div class="mt-3 col-main-inner">
   <PageHeader :title="$t('CO.ADMIN_CONTENT.TITLE')" />
 
-  <div class="item-content" v-for="content in contents" :key="content.id">
+  <div class="mt-5">
+    <div class="row mx-0">
+      <v-select class="hash-tag-content col-md-8 mt-0 px-0 mr-2 mb-2" :filterable="false" @search="onSearchHashTag" :multiple="true"
+                :clearable="false" maxHeight="50px"
+                v-model="conditionSearch.hash_tag"
+                label="hash_tag"
+                :options="listHashTag"
+                :reduce="u => u.hash_tag">
+        <template slot="no-options">
+          {{ $t('CO.ADD_CONTENT.MSG.HASH_TAG_NO_OPTION') }}
+        </template>
 
+        <template slot="option" slot-scope="u">
+          {{ u.hash_tag }}
+        </template>
+
+        <template slot="selected-option" slot-scope="u">
+          {{ u.hash_tag }}
+        </template>
+      </v-select>
+      <div class="col-md-3 group-btn d-flex justify-content-start align-items-end px-0 mb-2">
+        <button class="btn btn-primary" type="button" @click="searchContent()">{{ $t('BTN.SEARCH') }}</button>
+      </div>
+    </div>
+
+    <div class="row mx-0 mb-2 d-flex align-items-end">
+      <select class="form-control  col-md-3 px-0 mr-2 mb-2" v-model="conditionSearch.typeDatePost">
+        <option :value="DatePost.All">All</option>
+        <option :value="DatePost.SAME">Same</option>
+        <option :value="DatePost.BEFORE">Before</option>
+        <option :value="DatePost.SAME_OR_BEFORE">Same or Before</option>
+        <option :value="DatePost.AFTER">After</option>
+        <option :value="DatePost.SAME_OR_AFTER">Same or After</option>
+        <option :value="DatePost.BETWEEN">Between</option>
+      </select>
+      <div class="col-md-3 px-0 mr-2 mb-2" :class="{'has-danger': error.dateStart}">
+        <span :class="{'text-danger': error.dateStart}">{{ error.dateStart }}</span>
+        <date-picker class="col-md-12 px-0" v-model="conditionSearch.dateStart" lang="en" :clearable="false"></date-picker>
+      </div>
+      <div class="col-md-3 px-0 mr-2 mb-2" :class="{'has-danger': error.dateEnd}">
+        <span :class="{'text-danger': error.dateEnd}">{{ error.dateEnd }}</span>
+        <date-picker class="col-md-12 px-0" v-model="conditionSearch.dateEnd" lang="en" :clearable="false"
+                     v-if="conditionSearch.typeDatePost === DatePost.BETWEEN"></date-picker>
+      </div>
+    </div>
+  </div>
+
+  <div class="item-content" v-for="content in contents" :key="content.id">
     <div class="row">
       <div class="image-content">
         <img :src="link_image_content  + content.image" v-if="content.image">
