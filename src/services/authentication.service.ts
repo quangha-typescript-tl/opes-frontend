@@ -69,6 +69,7 @@ export class AuthenticationService extends BaseService {
       ShareValueService.setAccessToken(res['data']['access_token']);
       ShareValueService.fetchUserSession().then();
       this._canRefresh = true;
+      this._data = this.toAuthenticationModel(res['data']['access_token']);
     }).catch((error: any) => {
       console.log('*** error refresh token: ', error);
       this._canRefresh = true;
