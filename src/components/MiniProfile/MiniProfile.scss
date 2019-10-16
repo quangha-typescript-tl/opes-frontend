@@ -63,12 +63,30 @@
       margin-top: 0;
     }
   }
+  &-50 {
+    .mini-profile-avatar {
+      padding-right: 5px;
+    }
+    .mini-profile-userinfo-main {
+      font-size: _rem(16px);
+    }
+    .mini-profile-userinfo-sub {
+      font-size: _rem(12px);
+      &.mini-profile-userinfo-name-kana {
+        font-size: _rem(10px);
+        line-height: 1;
+      }
+    }
+    .mini-profile-userinfo-main + .mini-profile-userinfo-sub {
+      margin-top: 0;
+    }
+  }
   &-55 {
     .mini-profile-avatar {
       padding-right: 5px;
     }
     .mini-profile-userinfo-main {
-      font-size: _rem(12px);
+      font-size: _rem(16px);
     }
     .mini-profile-userinfo-sub {
       font-size: _rem(12px);

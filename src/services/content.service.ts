@@ -51,6 +51,15 @@ export class ContentService extends BaseService {
     params.append('hashTag', model.hashTag);
     return WebApi.get('/api/co/getListHashTag', {params: params});
   }
+
+  getDetailContentUser(conditionsSearch: any) {
+    let params = new URLSearchParams();
+    params.append('userId', conditionsSearch.userId);
+    params.append('hashTag', conditionsSearch.hashTag);
+    params.append('page', conditionsSearch.page);
+    params.append('size', conditionsSearch.size);
+    return WebApi.get('/api/co/getDetailContentUser', {params: params});
+  }
 }
 
 const contentService = new ContentService();

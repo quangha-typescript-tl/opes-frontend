@@ -3,6 +3,7 @@
 
 <script lang="ts">
   import {Component, Vue, Prop } from 'vue-property-decorator';
+  import {VUE_APP_API_URL_AVATAR} from '@/common/Helper';
 
   @Component({
     components: {}
@@ -28,7 +29,7 @@
       if (! this.avatar) {
         return;
       }
-      this.iconPath = this.avatar;
+      this.iconPath = VUE_APP_API_URL_AVATAR + this.avatar;
     }
   }
 </script>

@@ -3,5 +3,10 @@ export enum PublicContent {
   PUBLIC = 1
 }
 
+export enum TypeImageCropper {
+  AVATAR = 'avatar',
+  CONTENT = 'content'
+}
+
 export class ContentCommon {
 }

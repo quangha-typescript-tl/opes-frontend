@@ -1,11 +1,12 @@
 <template src="./ImageCropper.html" />
 
 <script lang="ts">
-  import {Component, Vue, Prop } from 'vue-property-decorator'
-  import FaceIcon from '../FaceIcon/FaceIcon.vue'
-  import $ from 'jquery'
-  import { Subject } from 'rxjs'
+  import {Component, Vue, Prop } from 'vue-property-decorator';
+  import FaceIcon from '../FaceIcon/FaceIcon.vue';
+  import $ from 'jquery';
+  import {Subject} from 'rxjs';
   import Cropper from 'cropperjs';
+  import {TypeImageCropper} from '@/common/ContentCommon';
 
   const MAX_SIZE = 5 * 1024 * 1024;
 
@@ -15,6 +16,7 @@
     }
   })
   export default class ImageCropper extends Vue {
+    public TypeImageCropper: typeof TypeImageCropper = TypeImageCropper;
     @Prop() imageCropperOptions: any;
     @Prop() checkValidate: boolean;
     @Prop() imageUrl: string;
@@ -39,8 +41,17 @@
     public imageUrlCropper = '';
 
     created() {
-      // this.dammyImagePath['default'] = '/img/image-cropper-photo-en.png';
-      // this.dammyImagePath['over'] = '/img/image-cropper-photo-over-en.png';
+      if (this.imageCropperOptions.typeImageCropper === TypeImageCropper.AVATAR) {
+        this.dammyImagePath = {
+          default: '/img/image-cropper-avatar-en.png',
+          over: '/img/image-cropper-avatar-over-en.png'
+        };
+      } else {
+        this.dammyImagePath = {
+          default: '/img/image-cropper-card-en-cn.png',
+          over: '/img/image-cropper-card-over-en-cn.png'
+        };
+      }
       this.imagePath = this.dammyImagePath.default;
       this.btnsDisabledFlag = true;
       this.getCroppedCanvasOption.fillColor = '#fff';
@@ -72,6 +83,12 @@
 
     setOption() {
       const self = this;
+      const aspectRatio = this.imageCropperOptions.typeImageCropper === TypeImageCropper.AVATAR ? 1 : (420/240);
+      const minCropBoxWidth = this.imageCropperOptions.typeImageCropper === TypeImageCropper.AVATAR ? 120 : 200;
+
+      // const aspectRatio = 420/240;
+      // const minCropBoxWidth = 200;
+
       const configImage = {
         center: true,
         highlight: true,
@@ -80,11 +97,11 @@
         autoCropArea: 1,
         zoomable: true,
         rotatable: true,
-        cropBoxResizable: true,
+        cropBoxResizable: false,
         autoCrop: true,
-        aspectRatio: 420/240,
+        aspectRatio: aspectRatio,
         minCropBoxHeight: 120,
-        minCropBoxWidth: 200,
+        minCropBoxWidth: minCropBoxWidth,
         checkCrossOrigin: false,
         ready: function(e: any) {
           console.log(e.type);

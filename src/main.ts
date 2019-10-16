@@ -16,6 +16,12 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.use(VeeValidate);
 Vue.use(BootstrapVue);
 
+const infiniteScroll = require('vue-infinite-scroll');
+Vue.use(infiniteScroll);
+
+import InfiniteLoading from 'vue-infinite-loading';
+Vue.use(InfiniteLoading);
+
 // var handleOutsideClick: { (e: any): void; (this: Document, ev: MouseEvent): any; (this: Document, ev: TouchEvent): any; (this: Document, ev: MouseEvent): any; (this: Document, ev: TouchEvent): any; };
 // Vue.directive('clickOutside', {
 //   bind (el, binding, vnode) {

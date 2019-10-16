@@ -6,6 +6,7 @@ import PageNotFound from './resources/views/PageNotFound.vue';
 import ListUser from './resources/views/re/ListUser/ListUser.vue';
 import AdminUser from './resources/views/re/AdminUser/AdminUser.vue';
 import AddUser from './resources/views/re/AddUser/AddUser.vue';
+import UserEdit from './resources/views/re/UserEdit/UserEdit.vue';
 import ChangePassword from './resources/views/re/ChangePassword/ChangePassword.vue';
 import ListDepartment from './resources/views/re/ListDepartment/ListDepartment.vue';
 
@@ -16,6 +17,7 @@ import ListContent from "@/resources/views/co/ListContent/ListContent.vue";
 import AdminContent from "@/resources/views/co/AdminContent/AdminContent.vue";
 import DetailContent from "@/resources/views/co/DetailContent/DetailContent.vue";
 import EditContent from "@/resources/views/co/EditContent/EditContent.vue";
+import ContentUser from "@/resources/views/co/ContentUser/ContentUser.vue";
 
 Vue.use(Router);
 
@@ -47,6 +49,18 @@ const router =  new Router({
       path: '/re/listUser',
       name: 'listUser',
       component: ListUser,
+      meta: { requiresAuth: true}
+    },
+    {
+      path: '/re/userEdit/:userId',
+      name: 'userEdit',
+      component: UserEdit,
+      meta: { requiresAuth: true}
+    },
+    {
+      path: '/re/userEdit',
+      name: 'userEdit',
+      component: UserEdit,
       meta: { requiresAuth: true}
     },
     {
@@ -103,6 +117,12 @@ const router =  new Router({
       component: EditContent,
       meta: { requiresAuth: true}
     },
+    {
+      path: '/co/contentUser',
+      name: 'contentUser',
+      component: ContentUser,
+      meta: { requiresAuth: true}
+    }
   ]
 });
 

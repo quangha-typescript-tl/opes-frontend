@@ -59,7 +59,7 @@
     <tr>
       <td>{{ $t('CO.EDIT_CONTENT.IMAGE') }}</td>
       <td>
-        <ImageCropper :imageCropperOptions="{id:'imageCropper',type:'card'}" :imageUrl="content.image" :checkValidate="checkValidate" @imageContent="saveContent($event)"></ImageCropper>
+        <ImageCropper :imageCropperOptions="{id:'imageCropper',type:'card', typeImageCropper: TypeImageCropper.CONTENT}" :imageUrl="content.image" :checkValidate="checkValidate" @imageContent="saveContent($event)"></ImageCropper>
       </td>
     </tr>
 

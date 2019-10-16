@@ -13,6 +13,8 @@
           {{ $t('CO.ADD_CONTENT.MSG.HASH_TAG_NO_OPTION') }}
         </template>
 
+
+
         <template slot="option" slot-scope="u">
           {{ u.hash_tag }}
         </template>
@@ -48,25 +50,26 @@
     </div>
   </div>
 
-  <div class="item-content" v-for="content in contents" :key="content.id">
-    <div class="row">
-      <div class="image-content">
-        <img :src="link_image_content  + content.image" v-if="content.image">
-        <img :src="link_image_content_default" v-if="!content.image" class="no-image">
-      </div>
+  <div id="admin-content">
+    <div class="item-content" v-for="content in contents" :key="content.id">
+      <div class="row">
+        <div class="image-content">
+          <img v-if="content.image" class="cursor-pointer" @click="detailContent(content.id)" :src="link_image_content  + content.image" />
+          <img v-if="!content.image" class="cursor-pointer no-image" @click="detailContent(content.id)" :src="link_image_content_default" />
+        </div>
 
-      <div class="ml-2 content">
-        <p class="title-content font-weight-bold fs20" @click="detailContent(content.id)">{{ content.title }}</p>
-        <div class="content-page">
-          {{ content.description }}
+        <div class="ml-2 content">
+          <p class="title-content font-weight-bold fs20" @click="detailContent(content.id)">{{ content.title }}</p>
+          <div class="content-page">
+            {{ content.description }}
+          </div>
         </div>
       </div>
-    </div>
-    <div class="text-right">
-      <button type="button" class="btn btn-outline-danger font-weight-bold" @click="deleteContent(content)">Delete</button>
-      <button type="button" class="btn btn-outline-warning font-weight-bold ml-1" @click="editContent(content.id)">Edit</button>
-      <button type="button" class="btn btn-outline-info font-weight-bold ml-1" @click="detailContent(content.id)">Chi tiết</button>
+      <div class="text-right">
+        <button type="button" class="btn btn-outline-danger font-weight-bold" @click="deleteContent(content)">Delete</button>
+        <button type="button" class="btn btn-outline-warning font-weight-bold ml-1" @click="editContent(content.id)">Edit</button>
+        <button type="button" class="btn btn-outline-info font-weight-bold ml-1" @click="detailContent(content.id)">Chi tiết</button>
+      </div>
     </div>
   </div>
-
 </div>

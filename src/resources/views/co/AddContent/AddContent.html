@@ -58,7 +58,7 @@
     <tr>
       <td>{{ $t('CO.ADD_CONTENT.IMAGE') }}</td>
       <td>
-        <ImageCropper :imageCropperOptions="{id:'imageCropper',type:'card'}" :checkValidate="checkValidate" @imageContent="postContent($event)"></ImageCropper>
+        <ImageCropper :imageCropperOptions="{id:'imageCropper',type:'card', typeImageCropper : TypeImageCropper.CONTENT}" :checkValidate="checkValidate" @imageContent="postContent($event)"></ImageCropper>
       </td>
     </tr>
 

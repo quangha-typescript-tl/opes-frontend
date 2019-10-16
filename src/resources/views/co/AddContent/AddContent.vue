@@ -13,7 +13,7 @@
   import DialogService from '@/services/dialog.service';
   import ShareValueService from '@/services/shareValue.service';
 
-  import { PublicContent } from "@/common/ContentCommon";
+  import { PublicContent, TypeImageCropper } from "@/common/ContentCommon";
   import { Validator } from '@/common/Validator';
   import { VUE_APP_API_URL_IMAGE } from '@/common/Helper';
 
@@ -31,6 +31,7 @@
     }
   })
   export default class AddContent extends Vue {
+    public TypeImageCropper: typeof TypeImageCropper = TypeImageCropper;
     public PublicContent: typeof PublicContent = PublicContent;
     public content = new ContentRegister('', '', PublicContent.PRIVATE, '', '', []);
     public checkValidate = false;

@@ -2,8 +2,9 @@
 
 
 <script lang="ts">
-  import {Component, Vue, Prop } from 'vue-property-decorator'
-  import FaceIcon from '../FaceIcon/FaceIcon.vue'
+  import {Component, Vue, Prop } from 'vue-property-decorator';
+  import FaceIcon from '../FaceIcon/FaceIcon.vue';
+  import moment from 'moment';
 
   @Component({
     components: {
@@ -23,6 +24,7 @@
     public firstName: string | undefined;
     public lastName: string | undefined;
     public avatar: string | undefined;
+    public timePost: string | undefined
     public mail: string | undefined;
     public officeName: string | undefined;
     public jobName: string | undefined;
@@ -38,6 +40,7 @@
       this.firstName = this.userInfo.firstName;
       this.lastName = this.userInfo.lastName;
       this.avatar = this.userInfo.avatar;
+      this.timePost = this.profileOptions.timePost ? moment(this.userInfo.timePost).format('DD-MM-YYYY HH:mm:ss') : '';
       // this.mail = this.profileOptions.mail ? this.userInfo.mail: '';
       // this.officeName = this.profileOptions.officeName ? this.userInfo.officeName: '';
       // this.jobName = this.profileOptions.jobName ? this.userInfo.jobName : '';

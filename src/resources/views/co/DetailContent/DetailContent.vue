@@ -4,6 +4,7 @@
   import {Component, Vue, Prop, Watch  } from 'vue-property-decorator';
   import LayoutDefault from '../../../layouts/LayoutDefault.vue';
   import PageHeader from "@/components/PageHeader/PageHeader.vue";
+  import MiniProfile from '@/components/MiniProfile/MiniProfile.vue';
   import { VUE_APP_API_URL_IMAGE } from '@/common/Helper';
 
   import ContentService from '@/services/content.service';
@@ -14,6 +15,7 @@
   @Component({
     components: {
       PageHeader,
+      MiniProfile
     }
   })
   export default class DetailContent extends Vue {
@@ -63,6 +65,10 @@
 
     detailContent(contentId: string) {
       this.$router.push('/co/detailContent/' + contentId);
+    }
+
+    detailContentUser() {
+      this.$router.push({path: '/co/contentUser', query: {userId: this.content.user_created, hashTag: null}});
     }
   }
 </script>

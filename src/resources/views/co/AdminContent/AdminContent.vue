@@ -13,7 +13,7 @@
   import DatePicker from 'vue2-datepicker';
   import moment from 'moment';
 
-  export enum DatePost{
+  export enum DatePost {
     All = 0,
     SAME = 6,
     BEFORE = 1,

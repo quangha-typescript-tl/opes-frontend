@@ -9,11 +9,14 @@
 
 .primary-menu {
   list-style: none;
-  border-top: 1px solid #777;
+  //border-top: 1px solid #777;
   padding-left: 0px;
 
   .item-menu-collapse {
     border-top: 1px solid #777 !important;
+    .fa {
+      margin-right: 0.5rem;
+    }
     &:after {
       content: '\F077';
       font-family: FontAwesome;
@@ -27,6 +30,13 @@
       font-family: FontAwesome;
       position: absolute;
       right: 12px;
+    }
+  }
+  .list-item-menu {
+    a {
+      &:hover {
+        text-decoration: none !important;
+      }
     }
   }
   .item-menu-card {

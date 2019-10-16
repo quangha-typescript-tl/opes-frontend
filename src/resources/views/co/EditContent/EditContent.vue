@@ -17,13 +17,14 @@
   import {Content} from "@/models/co/Content";
   import {UserSession} from "@/models/re/UserSession";
 
-  import { PublicContent } from '@/common/ContentCommon';
+  import { PublicContent, TypeImageCropper } from '@/common/ContentCommon';
   import { Validator } from '@/common/Validator';
 
   // script
   import moment from 'moment';
   import { VueEditor } from "vue2-editor";
   import vSelect from 'vue-select';
+  import {ContentRegister} from "@/models/co/ContentRegister";
 
   @Component({
     components: {
@@ -34,6 +35,7 @@
     }
   })
   export default class EditContent extends Vue {
+    public TypeImageCropper: typeof TypeImageCropper = TypeImageCropper;
     public PublicContent: typeof PublicContent = PublicContent;
     public contentId: string = '';
     public link_image_content = VUE_APP_API_URL_IMAGE;
@@ -64,7 +66,6 @@
       ContentService.getDetailContent(this.contentId).then((res) => {
         DialogService.setLoaderVisible(false);
         this.content = res['data']['content'];
-
         this.content.image = this.content.image ? this.link_image_content + this.content.image : '';
       }).catch((error) => {
         DialogService.setLoaderVisible(false);

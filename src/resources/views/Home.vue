@@ -211,6 +211,10 @@
     <div class="mt-5 d-flex">
       <date-picker v-model="value1" valueType="format" lang="en" ></date-picker>
     </div>
+
+    <MiniProfile :userInfo="{lastName: 'sssssssss', firstName: '', avatar: user.avatar, timePost: date1}" :profileOptions="{iconSize: 55, timePost: true}" />
+    <MiniProfile :userInfo="{lastName: 'sssssssss', firstName: '', avatar: user.avatar, timePost: date1}" :profileOptions="{iconSize: 50, timePost: true}" />
+    <MiniProfile :userInfo="{lastName: 'sssssssss', firstName: '', avatar: user.avatar, timePost: date1}" :profileOptions="{iconSize: 40, timePost: true}" />
   </div>
 </template>
 
@@ -220,6 +224,7 @@ import LayoutDefaultMain from '@/resources/layouts/LayoutDefaultMain.vue';
 import LayoutDefault from '@/resources/layouts/LayoutDefault.vue';
 import FaceIcon from '@/components/FaceIcon/FaceIcon.vue';
 import RegistrationService from '@/services/registration.service';
+import MiniProfile from '@/components/MiniProfile/MiniProfile.vue';
 import DialogService from '@/services/dialog.service';
 import { DialogResult } from '@/models/DialogParams';
 
@@ -233,7 +238,8 @@ import moment from 'moment'
     FaceIcon,
     vSelect,
     VueTimepicker,
-    DatePicker
+    DatePicker,
+    MiniProfile
   },
   directives: {
   }

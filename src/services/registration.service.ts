@@ -6,6 +6,10 @@ export class RegistrationService extends BaseService {
     super(props)
   }
 
+  getDetailUser(userId: string) {
+    return WebApi.get('/api/re/getDetailUser/' + userId);
+  }
+
   getListUser(conditionsSearch?: any) {
     let params = new URLSearchParams();
     params.append('name', (conditionsSearch && conditionsSearch['name']) ? conditionsSearch.name: '');
@@ -28,6 +32,9 @@ export class RegistrationService extends BaseService {
 
   updateUser(user: any) {
     return WebApi.post('/api/re/updateUser', user);
+  }
+  uploadUserAvatar(formData: any) {
+    return WebApi.post('/api/re/uploadUserAvatar', formData);
   }
   deleteUser(user: any) {
     return WebApi.post('/api/re/deleteUser', user);

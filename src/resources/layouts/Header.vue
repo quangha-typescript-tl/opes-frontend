@@ -25,16 +25,16 @@
                 <span class="mini-profile-userinfo-name font-weight-bold">{{ userSession.userName }}</span>
               </template>
 
-              <b-dropdown-item>
+              <b-dropdown-item class="item-menu-user">
                 <MiniProfile :userInfo="{lastName: userSession.userName, firstName: '', avatar: userSession.avatar}" :profileOptions="{iconSize: 75}" />
               </b-dropdown-item>
               <div class="dropdown-divider"></div>
 
-              <b-dropdown-item to="/re/detailUser">{{ $t('HEADER.PROFILE') }}</b-dropdown-item>
-              <b-dropdown-item to="/re/changePassword">{{ $t('HEADER.CHANGE_PASS') }}</b-dropdown-item>
+              <b-dropdown-item class="item-menu-user" to="/re/userEdit">{{ $t('HEADER.PROFILE') }}</b-dropdown-item>
+              <b-dropdown-item class="item-menu-user" to="/re/changePassword">{{ $t('HEADER.CHANGE_PASS') }}</b-dropdown-item>
 
               <div class="dropdown-divider"></div>
-              <b-dropdown-item @click.prevent="logout">{{ $t('LOGOUT') }}</b-dropdown-item>
+              <b-dropdown-item class="item-menu-user" @click.prevent="logout">{{ $t('LOGOUT') }}</b-dropdown-item>
             </b-dropdown>
 
           </b-navbar-nav>
@@ -195,6 +195,15 @@
 
     .fa {
       color: #fff;
+    }
+  }
+
+  .item-menu-user {
+    a {
+      &:hover, &:active {
+        background: #ffffff;
+        color: $opes-symbol-color;
+      }
     }
   }
 

@@ -6,6 +6,7 @@
   import PageHeader from "@/components/PageHeader/PageHeader.vue";
   import RegistrationService from '../../../../services/registration.service';
   import FaceIcon from '@/components/FaceIcon/FaceIcon.vue';
+  import MiniProfile from '@/components/MiniProfile/MiniProfile.vue';
   import DialogService from '@/services/dialog.service';
   import {UserStatus} from '@/common/RegistrationCommon';
   import {DialogResult} from "@/models/DialogParams";
@@ -13,7 +14,8 @@
   @Component({
     components: {
       PageHeader,
-      FaceIcon
+      FaceIcon,
+      MiniProfile
     }
   })
   export default class AdminUser extends Vue {
@@ -76,7 +78,8 @@
       });
     }
 
-    deleteUser(userId: number) {
+    deleteUser(event: any, userId: number) {
+      event.stopPropagation();
       const model = {
         userId: userId
       };
@@ -96,7 +99,8 @@
       })
     }
 
-    setUserStatus(userId: number, status: UserStatus) {
+    setUserStatus(event: any, userId: number, status: UserStatus) {
+      event.stopPropagation();
       const model = {
         userId: userId,
         status: status
@@ -127,31 +131,10 @@
       })
     }
 
-    saveUser(user: any) {
-      this.$validator.validateAll().then(
-        (re) => {
-          // check validate success
-          if (re) {
-            const model = {
-              userId: user.id,
-              userName: user.userName,
-              email: user.email,
-              department: user.department
-            };
-            DialogService.setLoaderVisible(true);
-            RegistrationService.updateUser(model).then((res) => {
-              DialogService.setLoaderVisible(false);
-              DialogService.showSuccess(this.$t('MSG.SUCCESS'), this.$t('BTN.OK'));
-            }).catch((error) => {
-              DialogService.setLoaderVisible(false);
-              DialogService.showError(this.$t('MSG.ERROR'), this.$t('BTN.OK'));
-            })
-          }
-
-        }
-      )
+    detailUser(userId: number) {
+      console.log(111111111);
+      this.$router.push('/re/userEdit/' + userId);
     }
-
   }
 </script>
 

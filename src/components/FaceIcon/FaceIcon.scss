@@ -1,6 +1,6 @@
 @import './../../assets/style/import.scss';
 
-$face-icon-size: 25, 30, 40, 55, 75, 76, 94;
+$face-icon-size: 25, 30, 40, 50, 55, 75, 76, 94;
 @each $size in $face-icon-size {
   .face-icon-#{$size} {
     width: #{$size}px;

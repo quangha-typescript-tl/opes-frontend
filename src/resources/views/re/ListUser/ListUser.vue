@@ -44,7 +44,7 @@
         }
       ).catch((error) => {
         DialogService.setLoaderVisible(false);
-        DialogService.showError(this.$t('RE.ADD_USER_MSG.ADD_USER_FAIL'), this.$t('BTN.OK'));
+        DialogService.showError(this.$t('RE.ADD_USER.MSG.ADD_USER_FAIL'), this.$t('BTN.OK'));
       })
     }
 

@@ -21,12 +21,10 @@
 
   </div>
 
-  <table class="table table-bordered mt-4">
+  <table class="table table-bordered table-hover cursor-pointer mt-4">
     <thead class="thead-light">
     <tr>
-      <th width="5%">#</th>
-      <!--<td width="5%"></td>-->
-      <th width="15%">User Name</th>
+      <th width="20%">User Name</th>
       <th width="15%">Email</th>
       <th width="15%">Department</th>
       <th width="15%">Temporary Password</th>
@@ -34,32 +32,20 @@
     </tr>
     </thead>
     <tbody>
-    <tr v-for="(user, index) in listUser" :key="index">
-      <td><FaceIcon :avatar="user.avatar" :iconSize="40" /></td>
-      <!--<td><FaceIcon :avatar="user.avatar" :iconSize="40" /></td>-->
-      <td :class="{'has-danger': errors.has('userName' + index)}">
-        <span v-show="errors.has('userName' + index)" class="text-danger fs14">{{ errors.first('userName' + index) }}</span>
-        <input class="form-control form-control-sm" v-model="user.userName" v-validate="'required'" :name="'userName' + index">
-      </td>
-      <td :class="{'has-danger': errors.has('email' + index)}">
-        <span v-show="errors.has('email' + index)" class="text-danger fs14">{{ errors.first('email' + index) }}</span>
-        <input class="form-control form-control-sm" v-model="user.email" v-validate="'required|email'" :name="'email' + index">
-      </td>
-      <td :class="{'has-danger': errors.has('department' + index)}">
-        <span v-show="errors.has('department' + index)" class="text-danger fs14">{{ errors.first('department' + index) }}</span>
-        <select class="form-control form-control-sm" v-model="user.department" v-validate="'required'" :name="'department' + index">
-          <option value="">Select Department</option>
-          <option v-for="department in listDepartment" :value="department.id">{{ department.departmentName }}</option>
-        </select>
-      </td>
+    <tr v-for="(user, index) in listUser" :key="index" @click="detailUser(user.id)">
       <td>
+        <MiniProfile :userInfo="{lastName: user.userName, firstName: '', avatar: user.avatar}" :profileOptions="{iconSize: 55}" />
+      </td>
+      <td class="align-middle">{{user.email}}</td>
+      <td class="align-middle">{{user.departmentName}}</td>
+      <td class="align-middle">
        <span v-if="user.status == UserStatus.PROVISOPNAL">{{ user.temporaryPassword }}</span>
       </td>
-      <td>
-        <button class="btn btn-sm btn-danger mr-2" @click="deleteUser(user.id)">Delete</button>
-        <button class="btn btn-sm btn-success mr-2" @click="saveUser(user)">Save</button>
-        <button class="btn btn-sm btn-warning mr-2 btn-status-user" v-if="user.status === UserStatus.ACTIVE" @click="setUserStatus(user.id, UserStatus.BLOCK)">Block</button>
-        <button class="btn btn-sm btn-warning mr-2 btn-status-user" v-if="user.status === UserStatus.BLOCK" @click="setUserStatus(user.id, UserStatus.ACTIVE)">UnBlock</button>
+      <td class="align-middle">
+        <button class="btn btn-sm btn-danger mr-2" @click="deleteUser($event, user.id)">Delete</button>
+        <!--<button class="btn btn-sm btn-success mr-2" @click="saveUser(user)">Save</button>-->
+        <button class="btn btn-sm btn-warning mr-2 btn-status-user" v-if="user.status === UserStatus.ACTIVE" @click="setUserStatus($event, user.id, UserStatus.BLOCK)">Block</button>
+        <button class="btn btn-sm btn-warning mr-2 btn-status-user" v-if="user.status === UserStatus.BLOCK" @click="setUserStatus($event, user.id, UserStatus.ACTIVE)">UnBlock</button>
         <button class="mr-2 btn-status-user btn-status-user-visibility" v-if="user.status === UserStatus.PROVISOPNAL"></button>
       </td>
     </tr>
