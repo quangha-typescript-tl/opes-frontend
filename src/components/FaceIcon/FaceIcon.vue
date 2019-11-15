@@ -22,11 +22,18 @@
     public mail: string | undefined;
 
     created() {
+      console.log(2);
+      this.updateFaceIcon();
+    }
+
+    beforeUpdate() {
+      console.log(1);
       this.updateFaceIcon();
     }
 
     updateFaceIcon() {
-      if (! this.avatar) {
+      console.log(this.avatar);
+      if (!this.avatar) {
         return;
       }
       this.iconPath = VUE_APP_API_URL_AVATAR + this.avatar;

@@ -33,11 +33,22 @@
     public busy = false;
     private _load = true;
     created() {
-      this.$emit('update:layout', LayoutDefault);
+      this.$emit('update:layout', LayoutDefault)
 
-      this.conditionsSearch.userId = this.$route.query['userId'] ? this.$route.query['userId'] : '';
-      this.conditionsSearch.hashTag = this.$route.query['hashTag'] ? this.$route.query['hashTag'] : '';
-      this.getDetailContentUser();
+      if (this.$route.fullPath === '/co/my-content') {
+        ShareValueService.fetchUserSession().then((userSession: any) => {
+          if (userSession) {
+            this.conditionsSearch.userId = userSession.id;
+            this.getDetailContentUser();
+          }
+        }).catch((error: any) => {
+          DialogService.showError(this.$t('MSG.ERROR'), this.$t('BTN.OK'));
+        });
+      } else {
+        this.conditionsSearch.userId = this.$route.query['userId'] ? this.$route.query['userId'] : '';
+        this.conditionsSearch.hashTag = this.$route.query['hashTag'] ? this.$route.query['hashTag'] : '';
+        this.getDetailContentUser();
+      }
     }
 
     getDetailContentUser() {

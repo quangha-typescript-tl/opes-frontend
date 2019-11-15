@@ -121,6 +121,12 @@ const router =  new Router({
       path: '/co/contentUser',
       name: 'contentUser',
       component: ContentUser,
+      meta: {requiresAuth: true}
+    },
+    {
+      path: '/co/my-content',
+      name: 'contentUser',
+      component: ContentUser,
       meta: { requiresAuth: true}
     }
   ]

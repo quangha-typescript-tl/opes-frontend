@@ -215,6 +215,17 @@
     <MiniProfile :userInfo="{lastName: 'sssssssss', firstName: '', avatar: user.avatar, timePost: date1}" :profileOptions="{iconSize: 55, timePost: true}" />
     <MiniProfile :userInfo="{lastName: 'sssssssss', firstName: '', avatar: user.avatar, timePost: date1}" :profileOptions="{iconSize: 50, timePost: true}" />
     <MiniProfile :userInfo="{lastName: 'sssssssss', firstName: '', avatar: user.avatar, timePost: date1}" :profileOptions="{iconSize: 40, timePost: true}" />
+
+    <!--<i class="fa fa-edit"></i>-->
+    <!--<button v-popover:foo>Toggle popover</button>-->
+
+    <!--<popover ref="foo">-->
+      <!--Hello-->
+    <!--</popover>-->
+    <button v-tooltip="'You have new messages.'">button</button>
+    <p>ll</p>
+    <p></p>
+
   </div>
 </template>
 
@@ -225,13 +236,11 @@ import LayoutDefault from '@/resources/layouts/LayoutDefault.vue';
 import FaceIcon from '@/components/FaceIcon/FaceIcon.vue';
 import RegistrationService from '@/services/registration.service';
 import MiniProfile from '@/components/MiniProfile/MiniProfile.vue';
-import DialogService from '@/services/dialog.service';
-import { DialogResult } from '@/models/DialogParams';
 
-import vSelect from 'vue-select'
-import VueTimepicker from 'vue2-timepicker/src/vue-timepicker.vue'
-import DatePicker from 'vue2-datepicker'
-import moment from 'moment'
+import vSelect from 'vue-select';
+import VueTimepicker from 'vue2-timepicker/src/vue-timepicker.vue';
+import DatePicker from 'vue2-datepicker';
+import moment from 'moment';
 
 @Component({
   components: {

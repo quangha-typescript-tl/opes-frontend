@@ -24,7 +24,7 @@
     public firstName: string | undefined;
     public lastName: string | undefined;
     public avatar: string | undefined;
-    public timePost: string | undefined
+    public timePost: string | undefined;
     public mail: string | undefined;
     public officeName: string | undefined;
     public jobName: string | undefined;
@@ -33,8 +33,12 @@
       this.updateInfo();
     }
 
+    beforeUpdate() {
+      this.updateInfo();
+    }
+
     updateInfo() {
-      if (! this.userInfo) {
+      if (!this.userInfo) {
         return;
       }
       this.firstName = this.userInfo.firstName;

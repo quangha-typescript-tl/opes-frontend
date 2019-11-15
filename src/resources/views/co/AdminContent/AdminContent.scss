@@ -46,4 +46,18 @@
       }
     }
   }
+
+  .control-content {
+    .fa {
+      color: #71808e;
+      &:hover {
+        color: #6959a6;
+        cursor: pointer;
+      }
+    }
+    .fa-edit {
+      position: relative;
+      top: 2px;
+    }
+  }
 }

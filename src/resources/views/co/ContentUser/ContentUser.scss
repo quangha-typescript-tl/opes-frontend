@@ -1,4 +1,11 @@
 #content-user {
+  .fa {
+    color: #71808e;
+    &:hover {
+      color: #6959a6;
+      cursor: pointer;
+    }
+  }
   .item-content {
     padding: 1rem 1rem;
     border-bottom: 1px solid #D7D7D7;
