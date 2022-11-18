@@ -39,7 +39,7 @@
     "vue2-editor": "^2.10.0",
     "vue2-timepicker": "^0.1.4",
     "webpack": "4.39.0",
-    "webpack-cli": "3.3.6",
+    "webpack-cli": "3.3.12",
     "webpack-dev-server": "3.7.2",
     "xlsx": "^0.14.4"
   },
@@ -47,7 +47,7 @@
     "@vue/cli-plugin-babel": "^3.11.0",
     "@vue/cli-plugin-eslint": "^3.11.0",
     "@vue/cli-plugin-typescript": "^3.11.0",
-    "@vue/cli-service": "^3.11.0",
+    "@vue/cli-service": "^5.0.8",
     "@vue/eslint-config-typescript": "^4.0.0",
     "babel-eslint": "^10.0.2",
     "eslint": "^5.16.0",
